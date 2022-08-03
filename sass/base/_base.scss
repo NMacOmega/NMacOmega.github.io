@@ -1,0 +1,78 @@
+:root {
+  // COLOR VARIABLES
+  --color-primary: hsl(120, 100%, 30%);
+  --color-primary-light: hsl(120, 30%, 60%);
+  --color-primary-dark: hsl(120, 100%, 20%);
+
+  --color-overlay-dark: hsla(120, 100%, 20%, 0.2);
+
+  --color-secondary: hsl(50, 80%, 60%);
+  --color-secondary-light: hsl(50, 80%, 90%);
+  --color-secondary-dark: hsl(50, 80%, 40%);
+
+  --color-tertiary: hsl(30, 100%, 30%);
+  --color-tertiary-light: hsl(30, 100%, 70%);
+  --color-tertiary-dark: hsl(30, 100%, 20%);
+
+  --color-black: #000;
+  --color-white: #fff;
+  --color-grey: #999;
+
+  --color-grey-light-1: #aaa;
+  --color-grey-light-2: #ccc;
+
+  --color-grey-dark-1: #666;
+  --color-grey-dark-2: #333;
+
+  // FONT VARIABLES
+  // $font-primary: "Nunito", sans-serif;
+  // $font-display: "Josefin Sans", sans-serif;
+  --size-font-default: 1.2rem;
+
+  //Shadow Variables
+
+  //RESPONSIVE BREAKPOINTS
+  $bp-largest: 75em; // 1200px converted to em for breakpoints
+  $bp-large: 62.5em; //1000px
+  $bp-medium: 50em; //800px
+  $bp-small: 37.5em; // 600px;
+}
+
+//Global Reset
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; //On default settings, font will be 10px instead of 16px
+  background-color: var(--color-primary-light);
+  font-family: "Nunito", sans-serif;
+  padding: 3rem;
+}
+
+body {
+  width: 80vw;
+  margin: auto;
+  background-color: var(--color-white);
+}
+
+.grid-container {
+  display: grid;
+
+  grid-template-rows: min-content 80vh 40vh 80vh 60vh 60vh 60vh min-content;
+
+  grid-template-columns: repeat(8, 1fr); // Change this later
+}
+
+::selection {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+}
