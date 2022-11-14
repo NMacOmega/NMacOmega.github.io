@@ -6,6 +6,8 @@
 
   --color-overlay-dark: hsla(120, 100%, 20%, 0.2);
 
+  --color-sidebar-active: hsl(30, 100%, 70%);
+
   --color-secondary: hsl(50, 80%, 60%);
   --color-secondary-light: hsl(50, 80%, 90%);
   --color-secondary-dark: hsl(50, 80%, 40%);
@@ -62,14 +64,6 @@ body {
   width: 80vw;
   margin: auto;
   background-color: var(--color-white);
-}
-
-.grid-container {
-  display: grid;
-
-  grid-template-rows: min-content 80vh 40vh 80vh 60vh 60vh 60vh min-content;
-
-  grid-template-columns: repeat(8, 1fr); // Change this later
 }
 
 ::selection {

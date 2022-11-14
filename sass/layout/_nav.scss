@@ -1,5 +1,5 @@
 .navigation {
-  grid-column: 1 / -1;
+  grid-column: 2 / -1;
 
   &__list {
     list-style: none;
@@ -13,6 +13,7 @@
 
   &__item {
     text-align: center;
+
     &--1 {
       grid-column: 2 / 3;
     }
@@ -20,8 +21,21 @@
 
   &__link:link,
   &__link:visited {
-    text-decoration: none;
+    font-size: 1.4rem;
     color: var(--color-black);
-    font-size: 1.9rem;
+    text-decoration: none;
+    // font-family: $font-display;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1.5rem;
+    display: block;
+
+    transition: all 0.2s;
+  }
+
+  &__link:hover,
+  &__link:active {
+    background-color: rgba(#000, 0.05);
+    transform: translateY(-3px);
   }
 }
