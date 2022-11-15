@@ -13,11 +13,16 @@
 // export default config;
 
 import adapter from '@sveltejs/adapter-static';
-import preprocessor from 'svelte-preprocess';
+import sveltePreprocess from 'svelte-preprocess';
 
 /** @type {import(""@sveltejs/kit").Config} */
 const config = {
-	preprocess: preprocessor(),
+	preprocess: sveltePreprocess({ typescript: false, scss: false }),
+	vitePlugin: {
+		experimental: {
+			useVitePreprocess: true
+		}
+	},
 	kit: {
 		adapter: adapter({
 			pages: 'docs',
@@ -25,11 +30,16 @@ const config = {
 		}),
 
 		paths: {
-			// change below to your repo name
 			base: process.env.NODE_ENV === 'production' ? '/portfolio' : ''
+		},
+		alias: {
+			'@comps': 'src/components',
+			'@img': 'src/lib/images',
+			'@svg': 'src/lib/svg',
+			'@sass': 'src/lib/sass',
+			$sass: 'src/lib/sass/main.scss',
+			$mixins: 'src/lib/sass/abstracts/mixins.scss'
 		}
-		// hydrate the <div id="svelte"> element in src/app.html
-		// target: '#svelte'
 	}
 };
 

@@ -1,59 +1,39 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import Header from '@comps/header/header.svelte';
+	import Sidebar from '@comps/sidebar/sidebar.svelte';
+	import Modal from '@comps/modal/modal.svelte';
+
+	import HeroSection from '@comps/home/hero.svelte';
+	import BioSection from '@comps/home/bio.svelte';
+	import TechSection from '@comps/home/techs/techs.svelte';
+	import ProjectsSection from '@comps/home/projects/projects.svelte';
+	// import ContactForm from '@comps/home/contactForm.svelte';
 </script>
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Nathaniel's Portfolio" />
 </svelte:head>
 
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+<section class="grid-container">
+	<Header />
+	<Sidebar />
+	<HeroSection />
+	<BioSection />
+	<TechSection />
+	<ProjectsSection />
 </section>
+<Modal />
 
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+<style lang="scss">
+	@import '$sass';
+	.grid-container {
+		display: grid;
+		grid-template-columns: max-content repeat(7, 1fr);
+		grid-template-rows: 5rem 50rem 40rem min-content 50rem 50rem 50rem 50rem;
 
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+		@include respond(tab-port) {
+			grid-template-rows: 50rem 40rem min-content 50rem 50rem 50rem 50rem;
+		}
 	}
 </style>

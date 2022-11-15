@@ -8,7 +8,23 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true
+		"strict": true,
+
+		"paths":{
+			"@comps": ["src/components"],
+			"@comps/*": ["src/components/*"],
+			"$lib":["src/lib"],   
+			"$lib/*":["src/lib/*"],
+			"@img/": ["src/lib/images"],
+			"@img/*": ["src/lib/images/*"],
+			"@svg/": ["src/lib/svg"],
+			"@svg/*": ["src/lib/svg/*"],
+			"$sass": ["src/lib/sass/main.scss"],
+			"@sass": ["src/lib/sass"],
+			"@sass/*": ["src/lib/sass/*"],
+			"$mixins": ["src/lib/sass/abstracts/mixins.scss"],
+
+		}
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias and https://kit.svelte.dev/docs/configuration#files
 	//
