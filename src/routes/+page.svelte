@@ -17,7 +17,7 @@
 
 <section class="grid-container">
 	<Header />
-	<Sidebar />
+	<!-- <Sidebar /> -->
 	<HeroSection />
 	<BioSection />
 	<TechSection />
