@@ -15,7 +15,7 @@
 <footer class="footer">
 	<ul class="footer-nav">
 		{#if $page.route.id === '/projects'}
-			<FooterItem num={1} href={'/'} title={'Home'} />
+			<FooterItem num={1} href={`${base}/`} title={'Home'} />
 			<FooterItem num={2} href={`${base}/projects`} title={'Projects'} />
 			<FooterItem num={3} href={'#'} title={'Contact'} onClick={onContactClick} noRoute />
 		{:else}

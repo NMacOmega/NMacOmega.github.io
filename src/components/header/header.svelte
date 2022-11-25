@@ -15,7 +15,7 @@
 <nav class="navigation">
 	<ul class="navigation__list">
 		{#if page === 'projects'}
-			<NavItem num={'1'} href={`/`} name={'Home'} />
+			<NavItem num={'1'} href={`${base}/`} name={'Home'} />
 			<NavItem num={'2'} href={'#'} name={'CV'} />
 			<NavItem num={'2'} href={'#'} name={'LinkedIn'} />
 			<NavItem num={'3'} href={'#'} name={'Contact'} onClick={onContactClick} />
