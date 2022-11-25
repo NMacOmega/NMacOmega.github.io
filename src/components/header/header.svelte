@@ -1,21 +1,35 @@
 <script>
 	import NavItem from './headerItem.svelte';
 	import { base } from '$app/paths';
+	import modalData from '$stores';
+
+	export let page;
+
+	const onContactClick = () => {
+		modalData.update((_) => {
+			return { type: 'form', name: 'contact' };
+		});
+	};
 </script>
 
 <nav class="navigation">
 	<ul class="navigation__list">
-		<NavItem num={'1'} href={`${base}/projects/cancode`} name={'Home'} />
-		<NavItem num={'2'} href={'#'} name={'About'} />
-		<NavItem num={'3'} href={'#'} name={'Projects'} />
-		<NavItem num={'4'} href={'#'} name={'CV'} />
-		<NavItem num={'5'} href={'#'} name={'Contact'} />
+		{#if page === 'projects'}
+			<NavItem num={'1'} href={`/`} name={'Home'} />
+			<NavItem num={'2'} href={'#'} name={'CV'} />
+			<NavItem num={'2'} href={'#'} name={'LinkedIn'} />
+			<NavItem num={'3'} href={'#'} name={'Contact'} onClick={onContactClick} />
+		{:else}
+			<NavItem num={'1'} href={`${base}/projects`} name={'Projects'} />
+			<NavItem num={'2'} href={'#'} name={'CV'} />
+			<NavItem num={'2'} href={'#'} name={'LinkedIn'} />
+			<NavItem num={'3'} href={'#'} name={'Contact'} onClick={onContactClick} />
+		{/if}
 	</ul>
 </nav>
 
 <style lang="scss">
-	@import '$mixins';
-
+	@import '$sass';
 	.navigation {
 		grid-column: 2 / -1;
 		@include respond(tab-port) {

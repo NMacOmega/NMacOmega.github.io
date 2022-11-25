@@ -1,7 +1,7 @@
 <script>
 	import { tweened } from 'svelte/motion';
 	import { quartInOut } from 'svelte/easing';
-	import modalData from '../../../stores';
+	import modalData from '$stores';
 	import svgPath from '@svg/logos.svg';
 	import mssqlSvg from '@svg/individuals/mssql.svg';
 	import nodejsSvg from '@svg/individuals/nodejs.svg';

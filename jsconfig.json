@@ -17,12 +17,16 @@
 			"$lib/*":["src/lib/*"],
 			"@img/": ["src/lib/images"],
 			"@img/*": ["src/lib/images/*"],
+			"@vid/": ["src/lib/videos"],
+			"@vid/*": ["src/lib/videos/*"],
 			"@svg/": ["src/lib/svg"],
 			"@svg/*": ["src/lib/svg/*"],
-			"$sass": ["src/lib/sass/main.scss"],
+			"$sass": ["src/lib/sass/styles.scss"],
 			"@sass": ["src/lib/sass"],
 			"@sass/*": ["src/lib/sass/*"],
 			"$mixins": ["src/lib/sass/abstracts/mixins.scss"],
+			"$functions": ["src/lib/sass/abstracts/functions.scss"],
+			"$stores": ["src/stores.js"],
 
 		}
 	}

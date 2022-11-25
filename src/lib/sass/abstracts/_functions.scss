@@ -1,0 +1,13 @@
+@use 'sass:list';
+
+@function row($start, $end) {
+	@return list.slash($start, $end);
+}
+
+@function col($start, $end) {
+	@return list.slash($start, $end);
+}
+
+@function grid($rowstart, $rowend, $colstart, $colend) {
+	@return list.slash($rowstart, $colstart, $rowend, $colend);
+}

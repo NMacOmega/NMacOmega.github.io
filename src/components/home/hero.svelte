@@ -11,9 +11,11 @@
 </header>
 
 <style lang="scss">
-	@import '$mixins';
+	@import '$sass';
+
 	.hero {
 		grid-column: 2 / -1;
+		min-height: 50vw;
 
 		background-image: linear-gradient(
 				to right,

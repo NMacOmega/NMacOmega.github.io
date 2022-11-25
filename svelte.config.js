@@ -1,23 +1,11 @@
-// import adapter from '@sveltejs/adapter-auto';
-// import preprocessor from 'svelte-preprocess';
-
-// /** @type {import('@sveltejs/kit').Config} */
-// const config = {
-// 	preprocess: preprocessor(),
-
-// 	kit: {
-// 		adapter: adapter()
-// 	}
-// };
-
-// export default config;
-
 import adapter from '@sveltejs/adapter-static';
 import sveltePreprocess from 'svelte-preprocess';
 
 /** @type {import(""@sveltejs/kit").Config} */
 const config = {
-	preprocess: sveltePreprocess({ typescript: false, scss: false }),
+	preprocess: sveltePreprocess({
+		typescript: false
+	}),
 	vitePlugin: {
 		experimental: {
 			useVitePreprocess: true
@@ -35,10 +23,13 @@ const config = {
 		alias: {
 			'@comps': 'src/components',
 			'@img': 'src/lib/images',
+			'@vid': 'src/lib/videos',
 			'@svg': 'src/lib/svg',
 			'@sass': 'src/lib/sass',
-			$sass: 'src/lib/sass/main.scss',
-			$mixins: 'src/lib/sass/abstracts/mixins.scss'
+			$sass: 'src/lib/sass/styles.scss',
+			$mixins: 'src/lib/sass/abstracts/mixins.scss',
+			$functions: 'src/lib/sass/abstracts/functions.scss',
+			$stores: 'src/stores.js'
 		}
 	}
 };

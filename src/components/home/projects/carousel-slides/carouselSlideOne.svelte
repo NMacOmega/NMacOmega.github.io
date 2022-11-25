@@ -12,6 +12,7 @@
 
 <style lang="scss">
 	@import '$sass';
+
 	//Grabs the container in the parent
 	:global(.slide__1) {
 		//Makes it a global so the reproduced carousel slide will be styled too
