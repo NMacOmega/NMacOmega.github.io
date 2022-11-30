@@ -1,14 +1,16 @@
 <script>
-	import GithubSlider from '@comps/githubSlider/githubSlider.svelte';
+	import Slider from '@comps/slideBadge/slideBadge.svelte';
 	import CapstoneVideoWEBM from '@vid/Crown-capstone.webm';
 	import CapstoneVideoMP4 from '@vid/Crown-capstone.mp4';
 	import MockupImacPNG from '@img/imac-mockup.png';
 </script>
 
 <div class={`${$$restProps.class || ''} project-capstone`}>
-	<h2>Capstone Crown Clothing App</h2>
-	<p class="project-capstone__p1">
-		Here is another awesome application, made in React with Context to sell clothing
+	<h2 class="project-description-heading">Capstone Crown Clothing App</h2>
+	<p class="project-capstone__p1 project-description-p">
+		In this learning project, I built an ecommerce solution with persistent data powered by Google
+		Firebase, React Context, and Redux. I also converted the app into a PWA to work offline on
+		mobile.
 	</p>
 	<div class="project-capstone__demo">
 		<div class="project-capstone__demo--inner">
@@ -35,68 +37,129 @@
 		</div>
 	</div>
 
-	<div class="project-capstone__points">
+	<div class="project-capstone__points--top">
 		<div class="project-capstone__point">
-			<h6 class="project-capstone__point--title">Context API</h6>
-			<p class="project-capstone__point--text">lorem impsum dolor ememet cinadus</p>
+			<h6 class="project-capstone__point--title project-point__heading">Context API</h6>
+			<p class="project-capstone__point--text project-point__text">
+				React Context simplify access to the cart, items catalogue, and user access token
+			</p>
 		</div>
 		<div class="project-capstone__point">
-			<h6 class="project-capstone__point--title">Mapbox Studio</h6>
-			<p class="project-capstone__point--text">lorem impsum dolor ememet cinadus</p>
+			<h6 class="project-capstone__point--title project-point__heading">Redux and Thunk</h6>
+			<p class="project-capstone__point--text project-point__text">
+				With Redux reducers handling the application data, unecessary redraws are kept to a minimum
+				and data is kept to React immutable standards.
+			</p>
 		</div>
 		<div class="project-capstone__point">
-			<h6 class="project-capstone__point--title">title</h6>
-			<p class="project-capstone__point--text">lorem impsum dolor ememet cinadus</p>
-		</div>
-		<div class="project-capstone__point">
-			<h6 class="project-capstone__point--title">title</h6>
-			<p class="project-capstone__point--text">lorem impsum dolor ememet cinadus</p>
-		</div>
-		<div class="project-capstone__point">
-			<h6 class="project-capstone__point--title">title</h6>
-			<p class="project-capstone__point--text">lorem impsum dolor ememet cinadus</p>
-		</div>
-		<div class="project-capstone__point">
-			<h6 class="project-capstone__point--title">title</h6>
-			<p class="project-capstone__point--text">lorem impsum dolor ememet cinadus</p>
+			<h6 class="project-capstone__point--title project-point__heading">Typescript</h6>
+			<p class="project-capstone__point--text project-point__text">
+				All parts of the app are typescript safe for intellisense and safe expandability
+			</p>
 		</div>
 	</div>
-	<GithubSlider class={`link-github`} href={`https://github.com/NMacOmega/crown`} />
+
+	<div class="project-capstone__points--bottom">
+		<div class="project-capstone__point">
+			<h6 class="project-capstone__point--title project-point__heading">Google Firebase</h6>
+			<p class="project-capstone__point--text project-point__text">
+				Async helper functions enable users to authenticate as a store account or via Gmail and
+				access the store catalogue
+			</p>
+		</div>
+		<div class="project-capstone__point">
+			<h6 class="project-capstone__point--title project-point__heading">Stripe Integration</h6>
+			<p class="project-capstone__point--text project-point__text">
+				Easy and quick integration to accept card payments in real time.
+			</p>
+		</div>
+		<div class="project-capstone__point">
+			<h6 class="project-capstone__point--title project-point__heading">Packaged for PWA</h6>
+			<p class="project-capstone__point--text project-point__text">
+				This app works on mobile without the need for a browser and can cache content for viewing
+				when offline.
+			</p>
+		</div>
+	</div>
+	<Slider class={`link-github`} svg={'github'} href={`https://github.com/NMacOmega/crown`}>
+		See Code on Github
+	</Slider>
 </div>
 
 <style lang="scss">
-	@import '$functions';
 	@import '$mixins';
 
 	.project-capstone {
 		background-color: lightgreen;
 		display: grid;
 		position: relative;
-		grid-template-columns: repeat(8, 1fr);
-		grid-template-rows: repeat(9, 1fr);
 
-		//Grid Assignments
-		//row start / row end / col start / col end
-		$title-grid: grid(1, span 1, 1, -1);
-		$p1-grid: grid(2, span 3, 1, -1);
-		$demo-grid: grid(3, 8, 1, span 6);
-		$points-grid: grid(1, -2, 1, -1);
+		grid-template-columns: 2rem min(50vw, 80rem) auto 2rem;
+		grid-template-rows:
+			[title] min-content 5rem [title desc] min-content 5rem [desc demo] min-content clamp(
+				2rem,
+				10vw,
+				20rem
+			)
+			[demo points-bottom] min-content 5rem;
+
+		grid-template-areas:
+			'title title title title'
+			'. . . .'
+			'desc desc desc desc'
+			'. . . .'
+			'. demo point-top .'
+			'. . . .'
+			'point-bottom point-bottom point-bottom point-bottom '
+			'. . . .';
+
+		@include respond(tab-land) {
+			grid-template-rows: repeat(2, min-content 5rem) min-content min(18rem, 20vw) repeat(
+					2,
+					min-content 5rem
+				);
+			grid-template-columns: 5rem 1fr 5rem;
+
+			grid-template-areas:
+				'title title title'
+				'. . .'
+				'desc desc desc'
+				'. . . '
+				'. demo .'
+				'. . .'
+				'. point-top .'
+				'. . . '
+				'. point-bottom .'
+				'. . .';
+		}
+
+		@include respond(phone) {
+			grid-template-columns: unset;
+			grid-template-areas:
+				'title'
+				'.'
+				'desc'
+				'.'
+				'demo'
+				'.'
+				'point-top'
+				'.'
+				'point-bottom'
+				'.';
+		}
 
 		h2 {
-			font-size: 2.8rem;
-			grid-area: $title-grid;
+			grid-area: title;
 			text-align: left;
 			padding: 3rem;
 		}
 
 		&__p1 {
-			grid-area: $p1-grid;
-			font-size: 1.6rem;
+			grid-area: desc;
 		}
 
 		&__demo {
-			grid-area: $demo-grid;
-			padding: 2vh 5vw;
+			grid-area: demo;
 
 			&--inner {
 				position: relative;
@@ -142,7 +205,7 @@
 			}
 
 			&--mockup {
-				max-width: 90%;
+				max-width: 96%;
 				position: absolute;
 				left: 50%;
 				transform: translateX(-50%);
@@ -150,55 +213,114 @@
 			}
 
 			video {
-				width: 85%;
+				width: 95%;
 				margin-top: 3%;
 			}
 		}
 
 		&__points {
-			grid-area: $points-grid;
-			display: grid;
-			grid-template-rows: repeat(4, 1fr);
-			grid-template-columns: repeat(4, 1fr);
+			&--top {
+				grid-area: point-top;
+				display: grid;
+				grid-template-rows: repeat(3, min-content);
+				grid-row-gap: 8rem;
+				padding: 0 4rem;
+			}
 
-			& :nth-child(1) {
-				grid-row: 2 / span 1;
-				grid-column: -2 / span 1;
+			&--bottom {
+				grid-area: point-bottom;
+				display: grid;
+				grid-template-columns: repeat(3, 5rem auto) 5rem;
+				grid-template-areas: '. col1 . col2 . col3 .';
+				align-items: start;
+
+				& > div:nth-child(1) {
+					grid-area: col1;
+				}
+
+				& > div:nth-child(2) {
+					grid-area: col2;
+				}
+
+				& > div:nth-child(3) {
+					grid-area: col3;
+				}
 			}
-			& :nth-child(2) {
-				grid-row: 3 / span 1;
-				grid-column: -2 / span 1;
+
+			@include respond(tab-land) {
+				&--top,
+				&--bottom {
+					display: flex;
+					flex-direction: row;
+					padding: 0;
+					align-items: space-between;
+					grid-column-gap: 6vw;
+				}
 			}
-			& :nth-child(3) {
-				grid-row: 4 / span 1;
-				grid-column: -2 / span 1;
+
+			@include respond(tab-port) {
+				&--top,
+				&--bottom {
+					grid-column: 2;
+					grid-row: 7 / 10;
+					display: grid;
+					grid-template-columns: repeat(2, auto);
+					grid-template-rows: repeat(3, 1fr);
+					align-items: start;
+					padding: 0;
+
+					& > div:nth-child(1) {
+						grid-area: one;
+					}
+					& > div:nth-child(2) {
+						grid-area: two;
+					}
+					& > div:nth-child(3) {
+						grid-area: three;
+					}
+				}
+
+				&--top {
+					grid-template-areas:
+						'one two'
+						'three .'
+						'. .';
+				}
+
+				&--bottom {
+					grid-template-areas:
+						'. .'
+						'. one'
+						'two three';
+				}
 			}
-			& :nth-child(4) {
-				grid-row: -1 / span 1;
-				grid-column: -3 / span 1;
-			}
-			& :nth-child(5) {
-				grid-row: -1 / span 1;
-				grid-column: -4 / span 1;
-			}
-			& :nth-child(6) {
-				grid-row: -1 / span 1;
-				grid-column: -5 / span 1;
+
+			@include respond(phone) {
+				&--top,
+				&--bottom {
+					display: flex;
+					flex-direction: column;
+					padding: 0 5rem;
+					grid-row-gap: 3rem;
+				}
+				&--top {
+					grid-area: point-top;
+				}
+				&--bottom {
+					grid-area: point-bottom;
+				}
 			}
 		}
 
 		&__point {
 			display: flex;
+			text-align: left;
 			flex-direction: column;
-			align-items: center;
+			align-items: start;
 			justify-content: center;
-			&--title {
-				font-size: 2rem;
-			}
 
 			&--text {
-				font-size: 1.2rem;
-				padding: 1rem;
+				padding-top: 1.4rem;
 			}
 		}
 

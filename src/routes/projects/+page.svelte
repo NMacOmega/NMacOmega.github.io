@@ -10,7 +10,7 @@
 
 <main class="grid-container">
 	<Header page="projects" />
-	<Sidebar />
+	<!-- <Sidebar /> -->
 
 	<ProjectHero class="project-section" />
 	<ProjectMapviewer class="project-section" />
