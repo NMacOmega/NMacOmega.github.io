@@ -6,7 +6,7 @@
 <div class={`${$$restProps.class || ''} project-hero`} style={`--url: url(${HeroBackgroundJPG})`}>
 	<div class="project-hero__inner">
 		<h1>Here are my projects</h1>
-		<h6>They are awesome</h6>
+		<h6>They are awesome!!</h6>
 	</div>
 </div>
 
