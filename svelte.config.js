@@ -19,6 +19,7 @@ const config = {
 
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '' : ''
+			//Use this when you have a project name in your github pages path, such as /portfolio. That way the built pages know how to route on Github
 		},
 		alias: {
 			'@comps': 'src/components',

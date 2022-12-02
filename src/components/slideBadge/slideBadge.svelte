@@ -1,10 +1,10 @@
 <script>
 	import SVGPath from '@svg/logos.svg';
 	import NetlifySVG from '@svg/individuals/netlify.svg';
+	import GithubPagesImg from '@img/githubpagelogo.jpg';
 	export let alwaysOpen = false,
 		reverse = false,
-		width = `16rem`,
-		padding = `3.5rem`,
+		width = `100%`,
 		iconSize = `6rem`,
 		iconPadding = `1rem`,
 		fontSize = `1.6rem`,
@@ -18,20 +18,29 @@
 	let direction = reverse ? 'reverse' : 'forward';
 
 	const iconOptions = {
-		github: ['svg', `${SVGPath}#github`],
-		netlify: ['img', NetlifySVG]
+		github: { type: 'svg', url: `${SVGPath}#github` },
+		netlify: { type: 'img', url: NetlifySVG },
+		githubPages: {
+			type: 'img',
+			url: GithubPagesImg,
+			size: '165%',
+			transform: 'translate(-18%, -20%)'
+		}
 	};
 
-	const [type, svgHref] = iconOptions[svg] || iconOptions['github'];
+	const {
+		type,
+		url: svgHref,
+		size = '100%',
+		transform = ''
+	} = iconOptions[svg] || iconOptions['github'];
 </script>
 
 <div
 	class={`${$$restProps.class || ''} slide-badge slide-badge--${direction}`}
-	style:--width={width}
-	style:--menu-width-initial={alwaysOpen ? '100%' : '0%'}
+	style:--max-width={width}
+	style:--menu-width-initial={alwaysOpen ? 'var(--text-width)' : '0%'}
 	style:--icon-size={iconSize}
-	style:--padding={padding}
-	style:--initial-padding={alwaysOpen ? padding : 0}
 	style:--icon-padding={iconPadding}
 	style:--font-size={fontSize}
 	style:--speed={transitionSpeed}
@@ -50,7 +59,9 @@
 				<img
 					src={svgHref}
 					alt="Logo SVG"
-					class={`slide-badge__svg slide-badge__svg--${direction}`}
+					class={`slide-badge__img slide-badge__img--${direction}`}
+					style:--image-width={size}
+					style:--image-transform={transform}
 				/>
 			{:else}
 				<svg class={`slide-badge__svg slide-badge__svg--${direction}`}>
@@ -70,101 +81,106 @@
 
 <style lang="scss">
 	@import '$mixins';
+
 	.slide-badge {
-		display: flex;
-		align-items: center;
+		width: 100%;
+		max-width: var(--max-width);
 		position: relative;
-		width: var(--width);
+
+		--text-width: calc(100% - (var(--icon-size) / 2));
+		--text-offset: calc(100% - var(--text-width));
 
 		&__link {
-			width: 100%;
-			height: 100%;
-			text-decoration: none;
 			color: var(--color-text);
 		}
-
-		&__icon {
-			position: absolute;
-			border: 1px solid var(--color-border);
-			border-radius: 50%;
-			background-color: var(--color-background);
-			width: var(--icon-size);
-			height: var(--icon-size);
-			padding: 1rem;
-			z-index: 3;
-
+		&__text {
+			width: 0;
+			position: relative;
 			&--forward {
-				left: 0%;
+				float: left;
 			}
 
 			&--reverse {
-				left: 100%;
-				transform: translateX(-100%);
+				float: right;
+			}
+		}
+
+		&__icon {
+			width: var(--icon-size);
+			height: var(--icon-size);
+			border: 1px solid var(--color-border);
+			position: absolute;
+			padding: var(--icon-padding);
+			background-color: var(--color-background);
+			border-radius: 50%;
+			overflow: hidden;
+			z-index: 100;
+			&--forward {
+				left: 0;
+			}
+
+			&--reverse {
+				right: 0;
 			}
 		}
 
 		&__icon:hover + &__text,
 		&__text:hover {
-			width: 100%;
+			width: var(--text-width);
 		}
-
-		&__icon--forward:hover + &__text--forward,
-		&__text--forward:hover {
-			padding-left: var(--padding);
-		}
-
-		&__icon--reverse:hover + &__text--reverse,
-		&__text--reverse:hover {
-			padding-right: calc(var(--padding) + var(--icon-size));
-		}
-
 		&__svg {
 			max-height: 100%;
 			max-width: 100%;
 		}
 
+		&__img {
+			width: var(--image-width);
+			transform: var(--image-transform);
+		}
+
 		&__text {
-			background-color: var(--color-background);
-			height: var(--icon-size);
-			display: flex;
-			align-items: center;
-			padding: 1.4rem;
-			border-radius: 0 50px 50px 0;
-			overflow: hidden;
 			width: var(--menu-width-initial);
-			transition: width var(--speed), padding-left var(--speed), padding-right var(--speed);
-			position: relative;
+			z-index: 99;
+			background-color: var(--color-background);
 			border: 1px solid var(--color-border);
+			height: var(--icon-size);
+			overflow: hidden;
+			transition: width var(--speed);
 
 			&--forward {
-				padding-left: var(--initial-padding);
-				margin-left: 3rem;
+				margin-left: var(--text-offset);
+				border-radius: 0 50px 50px 0;
 			}
 
 			&--reverse {
-				padding-right: var(--initial-padding);
-				margin-right: calc(3rem + var(--icon-size));
+				margin-right: var(--text-offset);
+				border-radius: 50px 0 0 50px;
 			}
 
 			@include respond(tab-land) {
-				width: 100%;
-				&--forward {
-					padding-left: var(--padding);
-				}
-				&--reverse {
-					padding-right: var(--padding);
-				}
+				width: var(--text-width);
 			}
 
 			&-title {
-				position: absolute;
-				min-width: 20rem;
+				width: 100%;
 				height: 100%;
 				display: flex;
 				align-items: center;
+
+				&--forward {
+					justify-content: end;
+					text-align: right;
+					padding-right: var(--text-offset);
+				}
+
+				&--reverse {
+					justify-content: start;
+					text-align: left;
+					padding-left: var(--text-offset);
+				}
 				h6 {
 					font-size: var(--font-size);
-					display: block;
+					min-width: var(--max-width);
 				}
 			}
 		}

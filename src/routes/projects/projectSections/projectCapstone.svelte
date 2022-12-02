@@ -3,6 +3,9 @@
 	import CapstoneVideoWEBM from '@vid/Crown-capstone.webm';
 	import CapstoneVideoMP4 from '@vid/Crown-capstone.mp4';
 	import MockupImacPNG from '@img/imac-mockup.png';
+
+	const capstoneGithubLink = `https://github.com/NMacOmega/crown`;
+	const capstoneNetlifyLink = `https://glittering-caramel-ecb91e.netlify.app/`;
 </script>
 
 <div class={`${$$restProps.class || ''} project-capstone`}>
@@ -81,9 +84,9 @@
 			</p>
 		</div>
 	</div>
-	<Slider class={`link-github`} svg={'github'} href={`https://github.com/NMacOmega/crown`}>
-		See Code on Github
-	</Slider>
+	<Slider class={`link-github`} svg={'github'} href={capstoneGithubLink}>See Code on Github</Slider>
+
+	<Slider class={`link-netlify`} svg={'netlify'} href={capstoneNetlifyLink}>Live on Netlify</Slider>
 </div>
 
 <style lang="scss">
@@ -94,58 +97,100 @@
 		display: grid;
 		position: relative;
 
-		grid-template-columns: 2rem min(50vw, 80rem) auto 2rem;
+		grid-template-columns: 2rem min(50vw, 80rem) 1fr 1fr 1fr 1fr 2rem;
+		$gutter: '. . . . . . .';
 		grid-template-rows:
-			[title] min-content 5rem [title desc] min-content 5rem [desc demo] min-content clamp(
-				2rem,
-				10vw,
-				20rem
-			)
-			[demo points-bottom] min-content 5rem;
+			[title] min-content 5rem
+			[desc] min-content 5rem
+			[demo] min-content clamp(2rem, 10vw, 20rem) min-content 5rem
+			[points] min-content 5rem;
 
 		grid-template-areas:
-			'title title title title'
-			'. . . .'
-			'desc desc desc desc'
-			'. . . .'
-			'. demo point-top .'
-			'. . . .'
-			'point-bottom point-bottom point-bottom point-bottom '
-			'. . . .';
+			'title title title title title title title'
+			$gutter
+			'. desc desc desc desc desc .'
+			$gutter
+			'. demo points-top points-top points-top points-top .'
+			'. . . . github . .'
+			'. . . . netlify . .'
+			$gutter
+			'points-bottom points-bottom points-bottom points-bottom points-bottom points-bottom points-bottom '
+			$gutter;
 
 		@include respond(tab-land) {
-			grid-template-rows: repeat(2, min-content 5rem) min-content min(18rem, 20vw) repeat(
-					2,
-					min-content 5rem
-				);
+			grid-template-columns: 5rem 1fr 1fr 5rem;
+
+			grid-template-rows:
+				[title] min-content 5rem
+				[desc] min-content 5rem
+				[demo] min-content min(18rem, 20vw)
+				[badges] min-content 5rem
+				[points] min-content 5rem min-content 5rem;
+
+			grid-template-areas:
+				'title title title title'
+				'. . . .'
+				'. desc desc .'
+				'. . . .'
+				'. demo demo .'
+				'. . . .'
+				'. github netlify .'
+				'. . . .'
+				'. points-top points-top .'
+				'. . . .'
+				'. points-bottom points-bottom .'
+				'. . . .';
+		}
+
+		@include respond(tab-port) {
 			grid-template-columns: 5rem 1fr 5rem;
+			grid-template-rows:
+				[title] min-content 5rem
+				[description] min-content 5rem
+				[demo] min-content min(18rem, 20vw)
+				[badges] min-content 2rem min-content 5rem
+				[points] min-content 5rem;
 
 			grid-template-areas:
 				'title title title'
 				'. . .'
-				'desc desc desc'
+				'. desc .'
 				'. . . '
 				'. demo .'
 				'. . .'
-				'. point-top .'
-				'. . . '
-				'. point-bottom .'
-				'. . .';
+				'. github .'
+				'. . .'
+				'. netlify .'
+				'. . .'
+				'. points .'
+				'. . . ';
 		}
 
 		@include respond(phone) {
-			grid-template-columns: unset;
+			grid-template-columns: 1rem 1fr 1rem;
+
+			grid-template-rows:
+				[title] min-content 5rem
+				[description] min-content 5rem
+				[demo] min-content min(20rem, 25vw)
+				[badges] min-content 2rem min-content 5rem
+				[points] min-content 5rem min-content 5rem;
+
 			grid-template-areas:
-				'title'
-				'.'
-				'desc'
-				'.'
-				'demo'
-				'.'
-				'point-top'
-				'.'
-				'point-bottom'
-				'.';
+				'title title title'
+				'. . .'
+				'. desc .'
+				'. . .'
+				'demo demo demo'
+				'. . .'
+				'. github .'
+				'. . .'
+				'. netlify .'
+				'. . .'
+				'. points-top .'
+				'. . .'
+				'. points-bottom .'
+				'. . .';
 		}
 
 		h2 {
@@ -179,6 +224,10 @@
 				position: absolute;
 				left: 50%;
 				transform: translateX(-50%);
+
+				@include respond(tab-port) {
+					display: none;
+				}
 			}
 
 			&--overlay {
@@ -220,7 +269,7 @@
 
 		&__points {
 			&--top {
-				grid-area: point-top;
+				grid-area: points-top;
 				display: grid;
 				grid-template-rows: repeat(3, min-content);
 				grid-row-gap: 8rem;
@@ -228,7 +277,7 @@
 			}
 
 			&--bottom {
-				grid-area: point-bottom;
+				grid-area: points-bottom;
 				display: grid;
 				grid-template-columns: repeat(3, 5rem auto) 5rem;
 				grid-template-areas: '. col1 . col2 . col3 .';
@@ -261,8 +310,7 @@
 			@include respond(tab-port) {
 				&--top,
 				&--bottom {
-					grid-column: 2;
-					grid-row: 7 / 10;
+					grid-area: points;
 					display: grid;
 					grid-template-columns: repeat(2, auto);
 					grid-template-rows: repeat(3, 1fr);
@@ -304,10 +352,10 @@
 					grid-row-gap: 3rem;
 				}
 				&--top {
-					grid-area: point-top;
+					grid-area: points-top;
 				}
 				&--bottom {
-					grid-area: point-bottom;
+					grid-area: points-bottom;
 				}
 			}
 		}
@@ -325,9 +373,25 @@
 		}
 
 		& :global(.link-github) {
-			position: absolute;
-			left: 62%;
-			bottom: 28%;
+			grid-area: github;
+			justify-self: start;
+			align-self: center;
+			--max-width: 25rem !important;
+
+			@include respond(tab-land) {
+				justify-self: center;
+			}
+		}
+
+		& :global(.link-netlify) {
+			grid-area: netlify;
+			justify-self: start;
+			align-self: center;
+			--max-width: 22rem !important;
+
+			@include respond(tab-land) {
+				justify-self: center;
+			}
 		}
 	}
 </style>

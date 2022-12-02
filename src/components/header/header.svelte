@@ -33,7 +33,7 @@
 	.navigation {
 		grid-column: 2 / -1;
 		@include respond(tab-port) {
-			display: none;
+			// display: none;
 		}
 
 		&__list {

@@ -41,15 +41,17 @@
 		svg={'github'}
 		alwaysOpen
 	>
-		See on Github</Slider
+		See Code on Github</Slider
 	>
 	<Slider
-		class={`link-netlify`}
+		class={`link-githubPages`}
 		href={`https://github.com/NMacOmega/FEWDFinalGroup2/tree/personal`}
-		svg={'netlify'}
+		svg={'githubPages'}
+		colorText={`#fff`}
+		colorBackground={'rgb(56, 123, 176)'}
 		alwaysOpen
 	>
-		Run on Netlify</Slider
+		Live on Github Pages</Slider
 	>
 	<div
 		class="project-fewd__slideshow"
@@ -132,26 +134,26 @@
 	}
 
 	.project-fewd {
-		background-color: cadetblue;
 		display: grid;
 		position: relative;
-		grid-template-columns: 5rem 1fr 5rem;
+		grid-template-columns: 5rem 1fr 1fr 5rem;
 		grid-template-rows: repeat(4, min-content 5rem) min-content 5rem min-content 5rem;
 
 		grid-template-areas:
-			'. header .'
-			'. . .'
-			'. desc .'
-			'. . .'
-			'. github .'
-			'. . .'
-			'. points-top .'
-			'. . .'
-			'slideshow slideshow slideshow'
-			'. . . '
-			'. points-bottom .';
+			'. header header .'
+			'. . . .'
+			'. desc desc .'
+			'. . . .'
+			'. github githubPages .'
+			'. . . .'
+			'. points-top points-top .'
+			'. . . .'
+			'slideshow slideshow slideshow slideshow'
+			'. . . .'
+			'. points-bottom points-bottom .';
 
 		@include respond(tab-land) {
+			grid-template-columns: 3rem 1fr 3rem;
 			grid-template-areas:
 				'. header .'
 				'. . .'
@@ -159,8 +161,10 @@
 				'. . .'
 				'. github .'
 				'. . .'
+				'. githubPages .'
+				'. . .'
 				'slideshow slideshow slideshow'
-				'. . . '
+				'. . .'
 				'. points-top .'
 				'. . .'
 				'. points-bottom .'
@@ -168,19 +172,28 @@
 		}
 
 		@include respond(phone) {
-			grid-template-rows: repeat(4, min-content 5rem) min-content min-content 5rem;
+			grid-template-columns: 3rem 1fr 1fr 3rem;
+			grid-template-rows:
+				[title] min-content 5rem
+				[desc] min-content 5rem
+				[badges] min-content 3rem min-content 5rem
+				[slideshow] min-content 5rem
+				[points] min-content min-content 5rem;
+
 			grid-template-areas:
-				'. header .'
-				'. . .'
-				'. desc .'
-				'. . .'
-				'. github .'
-				'. . .'
-				'slideshow slideshow slideshow'
-				'. . . '
-				'. points-top .'
-				'. points-bottom .'
-				'. . .';
+				'. header header .'
+				'. . . .'
+				'. desc desc .'
+				'. . . .'
+				'. github github .'
+				'. . . .'
+				'. githubPages githubPages .'
+				'. . . .'
+				'slideshow slideshow slideshow slideshow'
+				'. . . .'
+				'. points-top points-top .'
+				'. points-bottom points-bottom .'
+				'. . . .';
 		}
 
 		h2 {
@@ -197,7 +210,9 @@
 
 		&__slideshow {
 			grid-area: slideshow;
+			background-color: var(--color-primary);
 			overflow: hidden;
+			padding: 5rem 0;
 			--slide-width: 40rem;
 			--slide-height: 100%;
 			--slide-timing: 180s;
@@ -302,6 +317,13 @@
 		& :global(.link-github) {
 			grid-area: github;
 			margin: 0 auto;
+			--max-width: 25rem !important;
+		}
+
+		& :global(.link-githubPages) {
+			grid-area: githubPages;
+			margin: 0 auto;
+			--max-width: 27rem !important;
 		}
 	}
 </style>

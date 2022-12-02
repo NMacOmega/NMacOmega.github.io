@@ -91,6 +91,8 @@
 	.project-mapviewer {
 		display: grid;
 		grid-template-columns: 5rem 1fr 1fr 5rem;
+		$gutter: '. . . .';
+
 		grid-template-rows:
 			[title] min-content 5rem
 			[badges] min-content 5rem
@@ -100,17 +102,19 @@
 
 		grid-template-areas:
 			'title title title title'
-			'. . . .'
+			$gutter
 			'. github netlify .'
-			'. . . .'
+			$gutter
 			'. desc demo .'
 			'. . demo .'
 			'. points-top demo .'
-			'. . . .'
+			$gutter
 			'. points-bottom points-bottom .'
-			'. . . .';
+			$gutter;
 
 		@include respond(tab-port) {
+			grid-template-columns: 5rem 1fr 1fr 5rem;
+			$gutter: '. . . .';
 			grid-template-rows:
 				[title] min-content 5rem
 				[badges] min-content 5rem
@@ -121,23 +125,24 @@
 
 			grid-template-areas:
 				'title title title title'
-				'. . . .'
+				$gutter
 				'. github netlify .'
-				'. . . .'
+				$gutter
 				'. desc desc .'
-				'. . . .'
+				$gutter
 				'. demo demo .'
-				'. . . .'
+				$gutter
 				'. points-top points-top .'
-				'. . . . '
+				$gutter
 				'. points-bottom points-bottom .'
-				'. . . .';
+				$gutter;
 		}
 
 		@include respond(phone) {
+			grid-template-columns: 3rem 1fr 1fr 3rem;
 			grid-template-rows:
 				[title] min-content 5rem
-				[badges] min-content 5rem
+				[badges] min-content min-content 5rem
 				[desc] min-content 5rem
 				[demo] min-content 5rem
 				[points-top] min-content 5rem
@@ -146,7 +151,8 @@
 			grid-template-areas:
 				'title title title title'
 				'. . . .'
-				'. github netlify .'
+				'. github github .'
+				'. netlify netlify .'
 				'. . . .'
 				'. desc desc .'
 				'. . . .'
@@ -321,6 +327,8 @@
 		& :global(.link-github) {
 			grid-area: github;
 			justify-self: end;
+			--max-width: 25rem !important;
+			margin-right: 2rem;
 
 			@include respond(phone) {
 				margin: 0 auto;
@@ -330,6 +338,8 @@
 		& :global(.link-netlify) {
 			grid-area: netlify;
 			justify-self: start;
+			margin-left: 2rem;
+			--max-width: 21rem !important;
 			@include respond(phone) {
 				margin: 0 auto;
 			}
