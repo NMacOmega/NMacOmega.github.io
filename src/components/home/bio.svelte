@@ -6,27 +6,21 @@
 	</p>
 </section>
 
-<style lang="scss">
-	@import '$sass';
+<style lang="postcss">
 
 	.bio {
 		grid-column: 2 / -1;
 		min-height: 30rem;
-		// display: grid;
-		// grid-template-columns: 0.5fr 1fr 2fr 0.5fr;
-		// align-content: center;
-		// grid-column-gap: 2rem;
 		display: flex;
 		align-items: center;
 		padding: 0 10vw;
-
-		@include respond(tab-port) {
+		
+		@media(--viewport-tab-port){
 			flex-direction: column;
 			justify-content: center;
 		}
 	}
 	.bio__heading {
-		// grid-column: 2 / 3;
 		margin-right: 4vw;
 		margin-bottom: 5rem;
 		background-image: linear-gradient(to right, #7ed56f, #28b485);
@@ -37,7 +31,6 @@
 		letter-spacing: 2px;
 	}
 	.bio__text {
-		// grid-column: 3 / 4;
 		font-size: 2rem;
 		align-items: space-around;
 	}

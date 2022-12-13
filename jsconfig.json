@@ -21,11 +21,8 @@
 			"@vid/*": ["src/lib/videos/*"],
 			"@svg/": ["src/lib/svg"],
 			"@svg/*": ["src/lib/svg/*"],
-			"$sass": ["src/lib/sass/styles.scss"],
-			"@sass": ["src/lib/sass"],
-			"@sass/*": ["src/lib/sass/*"],
-			"$mixins": ["src/lib/sass/abstracts/mixins.scss"],
-			"$functions": ["src/lib/sass/abstracts/functions.scss"],
+			"@postcss":["src/lib/postcss"],
+			"@postcss/":["src/lib/postcss/*"],
 			"$stores": ["src/stores.js"],
 
 		}

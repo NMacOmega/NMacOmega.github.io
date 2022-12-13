@@ -4,7 +4,8 @@ import sveltePreprocess from 'svelte-preprocess';
 /** @type {import(""@sveltejs/kit").Config} */
 const config = {
 	preprocess: sveltePreprocess({
-		typescript: false
+		typescript: false,
+		postcss: true
 	}),
 	vitePlugin: {
 		experimental: {
@@ -26,10 +27,7 @@ const config = {
 			'@img': 'src/lib/images',
 			'@vid': 'src/lib/videos',
 			'@svg': 'src/lib/svg',
-			'@sass': 'src/lib/sass',
-			$sass: 'src/lib/sass/styles.scss',
-			$mixins: 'src/lib/sass/abstracts/mixins.scss',
-			$functions: 'src/lib/sass/abstracts/functions.scss',
+			'@postcss': 'src/lib/postcss',
 			$stores: 'src/stores.js'
 		}
 	}

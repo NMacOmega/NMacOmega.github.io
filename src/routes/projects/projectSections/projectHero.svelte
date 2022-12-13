@@ -10,8 +10,11 @@
 	</div>
 </div>
 
-<style lang="scss">
-	.project-hero {
+<style lang="postcss">
+
+	$tag: .project-hero;
+
+	$(tag) {
 		height: 40vh;
 		display: flex;
 		flex-direction: column;
@@ -19,23 +22,6 @@
 		justify-content: center;
 		position: relative;
 		background: none;
-
-		&__inner {
-			background-color: hsla(70, 10%, 40%, 0.6);
-			padding: 3rem;
-			color: #fff;
-			z-index: 2;
-			border-radius: 4px;
-
-			h1 {
-				font-size: 4rem;
-				padding: 4rem 0;
-			}
-
-			h6 {
-				font-size: 2.2rem;
-			}
-		}
 
 		&::before {
 			content: '';
@@ -47,4 +33,21 @@
 			z-index: 1;
 		}
 	}
+
+	$(tag)__inner {
+			background-color: hsla(70, 10%, 40%, 0.6);
+			padding: 3rem;
+			color: #fff;
+			z-index: 2;
+			border-radius: 4px;
+
+			& > h1 {
+				font-size: 4rem;
+				padding: 4rem 0;
+			}
+
+			& > h6 {
+				font-size: 2.2rem;
+			}
+		}
 </style>

@@ -49,40 +49,45 @@
 	style:--color-border={colorBorder}
 >
 	<a
-		{href}
-		class={`slide-badge__link slide-badge__link--${direction}`}
-		target="_blank"
-		rel="noopener noreferrer"
-	>
-		<div class={`slide-badge__icon slide-badge__icon--${direction}`}>
-			{#if type === 'img'}
-				<img
-					src={svgHref}
-					alt="Logo SVG"
-					class={`slide-badge__img slide-badge__img--${direction}`}
-					style:--image-width={size}
-					style:--image-transform={transform}
-				/>
-			{:else}
-				<svg class={`slide-badge__svg slide-badge__svg--${direction}`}>
-					<use xlink:href={svgHref} />
-				</svg>
-			{/if}
+	{href}
+	target="_blank"
+	rel="noopener noreferrer"
+>
+	<div class={`slide-badge__icon slide-badge__icon--${direction}`}>
+		{#if type === 'img'}
+			<img
+				src={svgHref}
+				alt="Logo SVG"
+				style:--image-width={size}
+				style:--image-transform={transform}
+			/>
+		{:else}
+			<svg>
+				<use xlink:href={svgHref} />
+			</svg>
+		{/if}
+	</div>
+	<div class={`slide-badge__text slide-badge__text--${direction}`}>
+		<div class={`slide-badge__text-title slide-badge__text-title--${direction}`}>
+			<h6>
+				<slot />
+			</h6>
 		</div>
-		<div class={`slide-badge__text slide-badge__text--${direction}`}>
-			<div class={`slide-badge__text-title slide-badge__text-title--${direction}`}>
-				<h6>
-					<slot />
-				</h6>
-			</div>
-		</div>
-	</a>
+	</div>
+</a>
 </div>
 
-<style lang="scss">
-	@import '$mixins';
 
-	.slide-badge {
+<style lang="postcss">
+
+	/*Variables*/
+	$container: .slide-badge;
+	$text-container: $(container)__text;
+	$icon: $(container)__icon;
+	$title: $(container)__text-title;
+
+
+	$(container) {
 		width: 100%;
 		max-width: var(--max-width);
 		position: relative;
@@ -90,22 +95,12 @@
 		--text-width: calc(100% - (var(--icon-size) / 2));
 		--text-offset: calc(100% - var(--text-width));
 
-		&__link {
+		& > a {
 			color: var(--color-text);
+			text-decoration: none;
 		}
-		&__text {
-			width: 0;
-			position: relative;
-			&--forward {
-				float: left;
-			}
-
-			&--reverse {
-				float: right;
-			}
-		}
-
-		&__icon {
+	}
+		$(icon) {
 			width: var(--icon-size);
 			height: var(--icon-size);
 			border: 1px solid var(--color-border);
@@ -115,30 +110,25 @@
 			border-radius: 50%;
 			overflow: hidden;
 			z-index: 100;
-			&--forward {
-				left: 0;
-			}
-
-			&--reverse {
-				right: 0;
-			}
 		}
+		$(icon)--forward {left: 0;}
+		$(icon)--reverse {right: 0;}
 
-		&__icon:hover + &__text,
-		&__text:hover {
+		$(icon):hover + $(text-container),
+		$(text-container):hover {
 			width: var(--text-width);
 		}
-		&__svg {
+		svg {
 			max-height: 100%;
 			max-width: 100%;
 		}
 
-		&__img {
+		img {
 			width: var(--image-width);
 			transform: var(--image-transform);
 		}
 
-		&__text {
+		$(text-container) {
 			width: var(--menu-width-initial);
 			z-index: 99;
 			background-color: var(--color-background);
@@ -147,42 +137,41 @@
 			overflow: hidden;
 			transition: width var(--speed);
 
-			&--forward {
-				margin-left: var(--text-offset);
-				border-radius: 0 50px 50px 0;
-			}
-
-			&--reverse {
-				margin-right: var(--text-offset);
-				border-radius: 50px 0 0 50px;
-			}
-
-			@include respond(tab-land) {
+			@media(--viewport-tab-land){
 				width: var(--text-width);
 			}
+		}
+		$(text-container)--forward {
+			margin-left: var(--text-offset);
+			margin-right: auto;
+			border-radius: 0 50px 50px 0;
+		}
+		$(text-container)--reverse {
+			margin-right: var(--text-offset);
+			margin-left: auto;
+			border-radius: 50px 0 0 50px;
+		}
 
-			&-title {
+		 $(title) {
 				width: 100%;
 				height: 100%;
 				display: flex;
 				align-items: center;
-
-				&--forward {
-					justify-content: end;
-					text-align: right;
-					padding-right: var(--text-offset);
-				}
-
-				&--reverse {
-					justify-content: start;
-					text-align: left;
-					padding-left: var(--text-offset);
-				}
-				h6 {
+				 & > h6 {
 					font-size: var(--font-size);
 					min-width: var(--max-width);
 				}
+			} 
+			$(title)--forward {
+				justify-content: end;
+					text-align: right;
+					padding-right: var(--text-offset);
 			}
-		}
-	}
+
+			$(title)--reverse {
+				justify-content: start;
+					text-align: left;
+					padding-left: var(--text-offset);
+			}
+	
 </style>

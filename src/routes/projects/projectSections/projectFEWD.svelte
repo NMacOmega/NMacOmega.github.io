@@ -27,7 +27,7 @@
 		slideSpacing = '2rem';
 </script>
 
-<div class={`${$$restProps.class || ''} project-fewd`}>
+<div id='fewd' class={`${$$restProps.class || ''} project-fewd`}>
 	<h2 class="project-description-heading">Cancode Communities: FEWD Final project</h2>
 	<p class="project-fewd__p1 project-description-p">
 		This was my first collab on a course for HTML and CSS by Cancode Communities. With the insight
@@ -120,8 +120,7 @@
 	</div>
 </div>
 
-<style lang="scss">
-	@import '$mixins';
+<style lang="postcss">
 
 	@keyframes slideLeft {
 		0% {
@@ -133,7 +132,9 @@
 		}
 	}
 
-	.project-fewd {
+	$tag: .project-fewd;
+
+	$(tag) {
 		display: grid;
 		position: relative;
 		grid-template-columns: 5rem 1fr 1fr 5rem;
@@ -152,7 +153,7 @@
 			'. . . .'
 			'. points-bottom points-bottom .';
 
-		@include respond(tab-land) {
+		@media(--viewport-tab-land){
 			grid-template-columns: 3rem 1fr 3rem;
 			grid-template-areas:
 				'. header .'
@@ -171,7 +172,7 @@
 				'. . .';
 		}
 
-		@include respond(phone) {
+		@media(--viewport-phone){
 			grid-template-columns: 3rem 1fr 1fr 3rem;
 			grid-template-rows:
 				[title] min-content 5rem
@@ -196,19 +197,21 @@
 				'. . . .';
 		}
 
-		h2 {
+		 & > h2 {
 			text-align: center;
 			padding: 3rem;
 			padding-bottom: 0;
 			grid-area: header;
 		}
 
-		&__p1 {
+		& > $(tag)__p1 {
 			padding: 0 5%;
 			grid-area: desc;
 		}
 
-		&__slideshow {
+	}
+
+		$(tag)__slideshow {
 			grid-area: slideshow;
 			background-color: var(--color-primary);
 			overflow: hidden;
@@ -224,25 +227,27 @@
 							(var(--slide-spacing) * var(--number-slides) * 2)
 					) * -1
 			);
+			
+		}
 
-			&--inner {
+		$(tag)__slideshow--inner{
 				display: flex;
 				transform: translateX(0);
 				height: 100%;
 				animation: slideLeft var(--slide-timing) linear infinite;
 			}
 
-			&--slide {
+		$(tag)__slideshow--slide{
 				position: relative;
 			}
 
-			&--img {
+		$(tag)__slideshow--img{
 				max-width: var(--slide-width);
 				max-height: var(--slide-height);
 				margin: 0 var(--slide-spacing);
 			}
 
-			&--link {
+		$(tag)__slideshow--link{
 				text-decoration: none;
 				position: absolute;
 				display: flex;
@@ -262,18 +267,26 @@
 				}
 			}
 
-			&--title {
+		$(tag)__slideshow--title{
 				color: #fff;
 				font-size: 1.6rem;
 				padding: 3.2rem;
 				border-radius: 10px;
 				background-color: hsla(1, 10%, 10%, 90%);
 			}
-		}
 
-		&__points {
-			&--top,
-			&--bottom {
+		$top: $(tag)__points--top;
+		$bottom: $(tag)__points--bottom;
+
+		$(top) {
+				grid-area: points-top;
+			}
+
+		$(bottom) {
+				grid-area: points-bottom;
+			}
+		$(top), 
+		$(bottom) {
 				display: grid;
 				grid-template-columns: 4fr 1fr 4fr;
 				align-items: start;
@@ -285,23 +298,14 @@
 					grid-column: 3;
 				}
 
-				@include respond(phone) {
+				@media(--viewport-phone){
 					display: flex;
 					flex-direction: column;
 					align-items: center;
 				}
 			}
 
-			&--top {
-				grid-area: points-top;
-			}
-
-			&--bottom {
-				grid-area: points-bottom;
-			}
-		}
-
-		&__point {
+		$(tag)__point {
 			display: flex;
 			flex-direction: column;
 			align-items: start;
@@ -309,21 +313,20 @@
 			justify-content: center;
 			padding: 2rem;
 
-			&--text {
+			& > $(tag)__point--text {
 				padding-top: 1rem;
 			}
 		}
 
-		& :global(.link-github) {
+	 :global(.link-github) {
 			grid-area: github;
 			margin: 0 auto;
 			--max-width: 25rem !important;
 		}
 
-		& :global(.link-githubPages) {
+	:global(.link-githubPages) {
 			grid-area: githubPages;
 			margin: 0 auto;
 			--max-width: 27rem !important;
 		}
-	}
 </style>

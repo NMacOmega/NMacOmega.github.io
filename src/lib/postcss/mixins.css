@@ -1,0 +1,15 @@
+/*Breakpoints*/
+
+@custom-media --viewport-phone (width <= 37.5em); /* Phone: 600px */
+@custom-media --viewport-tab-port (width <= 56.25em); /* Tablet Portrat: 900px */
+@custom-media --viewport-tab-land (width <= 75em); /* Tablet Landscape: 1200px */
+@custom-media --viewport-desktop (width <= 112.4em); /* Desktop: 1800px */
+@custom-media --viewport-big-desktop (width > 112.4em); /* Big Desktop: > 1800px */
+
+/* @define-mixin icon $network, $color: blue {
+	@if 3 > 5 {
+		color: orange;
+	} @else {
+		color: red;
+	}
+} */

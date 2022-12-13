@@ -10,8 +10,7 @@
 	</div>
 </header>
 
-<style lang="scss">
-	@import '$sass';
+<style lang="postcss">
 
 	.hero {
 		grid-column: 2 / -1;
@@ -32,7 +31,7 @@
 		clip-path: polygon(0 0, 100% 0, 100% 70vh, 0 100%);
 		-webkit-clip-path: polygon(0 0, 100% 0, 100% 70vh, 0 100%);
 
-		@include respond(phone) {
+		@media(--viewport-phone){
 			grid-template-columns: 1fr;
 			justify-items: center;
 		}
@@ -43,7 +42,8 @@
 		border-radius: 50%;
 		border: 3px solid var(--color-white);
 		margin-left: 50px;
-		@include respond(phone) {
+	
+		@media(--viewport-phone){
 			align-self: end;
 			margin: 0 auto;
 		}
@@ -53,7 +53,8 @@
 		border-radius: 14px;
 		padding: 1.6rem;
 		background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.6), black);
-		@include respond(phone) {
+
+		@media(--viewport-phone){
 			align-self: start;
 			text-align: center;
 			margin: 20px 10px;

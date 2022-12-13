@@ -18,19 +18,21 @@
   </a>
 </li>
 
-<style lang="scss">
-  .sidebar {
-    &__item {
+<style lang="postcss">
+  $tag: .sidebar;
+  
+  $(tag) {
+    & $(tag)__item {
       text-align: center;
       position: relative;
     }
 
-    &__link:link,
-    &__link:visited {
+    & $(tag)__link:link,
+    & $(tag)__link:visited {
       font-size: 1.4rem;
       color: var(--color-black);
       text-decoration: none;
-      // font-family: $font-display;
+       /* font-family: $font-display; */
       text-transform: uppercase;
       text-align: center;
       padding: 1.5rem;
@@ -40,36 +42,37 @@
       clip-path: polygon(0 0, 200% 0, 200% 100%, 0 100%);
     }
 
-    &__link:hover,
-    &__link:active {
+    & $(tag)__link:hover,
+    & $(tag)__link:active {
       background-color: var(--color-sidebar-active);
     }
 
-    &__link:hover > &__icon-container,
-    &__link:active > &__icon-container {
+    & $(tag)__link:hover > & $(tag)__icon-container,
+    & $(tag)__link:active > & $(tag)__icon-container {
       margin-left: -10px;
     }
 
-    &__link:hover &__label,
-    &__link:active &__label {
+    & $(tag)__link:hover & $(tag)__label,
+    & $(tag)__link:active & $(tag)__label {
       transform: rotateZ(0);
     }
 
-    &__icon {
+    & $(tag)__icon {
       width: 3rem;
       height: 3rem;
-
+/* 
       &--front {
-        //Make front like flip cards
-      }
+        Make front like flip cards
+      } */
 
-      &--back {
-        //Same as front but referse
+      /* &--back {
+        Same as front but referse
         display: none;
-      }
+      } */
     }
+  }
 
-    &__label {
+  $(tag)__label {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -86,8 +89,7 @@
       transition: all 0.2s;
     }
 
-    &__text {
+    $(tag)__text {
       margin-right: 1rem;
     }
-  }
 </style>

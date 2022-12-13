@@ -1,5 +1,8 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
-const modalData = writable({});
+const modalData = writable({
+	name: '',
+	bodyComponent: null
+});
 
 export default modalData;

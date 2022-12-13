@@ -39,14 +39,17 @@
 	</ul>
 </nav>
 
-<style lang="scss">
+<style lang="postcss">
 	.sidebar {
 		grid-row: 1 / -1;
 		grid-column: 1 / 2;
 		position: relative;
 		z-index: 1000;
 
-		&__list {
+
+	}
+
+	.sidebar__list {
 			list-style: none;
 			display: grid;
 			grid-auto-rows: min-content;
@@ -58,5 +61,4 @@
 			position: sticky;
 			top: 0;
 		}
-	}
 </style>

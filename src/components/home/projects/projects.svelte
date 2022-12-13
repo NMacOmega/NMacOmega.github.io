@@ -12,8 +12,6 @@
 	const goToCarouselNext = () => carousel.goToNext({ animated: true });
 </script>
 
-<!-- <script src="./file.js"></script> -->
-
 <section class="projects">
 	<h1 class="projects__heading heading-1">I love to create</h1>
 	<p class="projects__text">
@@ -62,147 +60,147 @@
 	</div>
 </section>
 
-<style lang="scss">
-	@import '$sass';
+<style lang="postcss">
+	$tag: .projects;
 
-	.projects {
+	$(tag){
 		grid-column: 2 / -1;
 		display: grid;
 		grid-template-rows: min-content min-content max-content;
 		text-align: center;
 		padding-top: 4rem;
+	}
 
-		&__text {
+	$(tag)__text{
 			font-size: 2rem;
 			padding: 3rem 20%;
-		}
+	}
 
-		&__display {
-			overflow: hidden;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-bottom: 4rem;
-			height: 100%;
+	$(tag)__display{
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 4rem;
+		height: 100%;
+	}
 
-			&__item {
-				height: inherit;
-			}
-			&-btn {
-				padding: 2rem;
-				position: absolute;
-				top: 50%;
-				transform: translateY(-50%);
-				border-radius: 50%;
-				z-index: 2500;
+	$(tag)__display-item{
+		height: inherit;
+	}
 
-				&::before,
-				&::after {
-					content: '';
-					width: 0.28rem;
-					height: 2rem;
-					background-color: #000;
-					position: absolute;
-					left: 50%;
-				}
-
-				&::before {
-					top: 10%;
-				}
-				&::after {
-					bottom: 10%;
-				}
-
-				&--prev {
-					left: 0;
-					margin-left: 10px;
-					&::before {
-						transform: rotate(45deg);
-					}
-
-					&::after {
-						transform: rotate(-45deg);
-					}
-
-					@include respond(tab-port) {
-						display: none;
-					}
-				}
-
-				&--next {
-					right: 0;
-					margin-right: 10px;
-					&::before {
-						transform: rotate(-45deg);
-					}
-
-					&::after {
-						transform: rotate(45deg);
-					}
-
-					@include respond(tab-port) {
-						display: none;
-					}
-				}
-			}
-
-			&-btn-container {
+	$(tag)__display-btn-container {
 				width: 100%;
 				display: none;
-				@include respond(tab-port) {
+				@media(--viewport-tab-port){
 					display: flex;
 					justify-content: space-evenly;
 				}
 			}
 
-			&-btn--outer {
-				padding: 2rem 0;
-				position: relative;
-				width: clamp(20%, 10vw, 30%);
+	$(tag)__display-btn{
+		padding: 2rem;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		border-radius: 50%;
+		z-index: 2500;
 
-				@include respond(phone) {
-					width: clamp(7rem, 40%, 13rem);
-				}
+		&::before,
+		&::after {
+			content: '';
+			width: 0.28rem;
+			height: 2rem;
+			background-color: #000;
+			position: absolute;
+			left: 50%;
+		}
 
-				&::before,
-				&::after {
-					content: '';
-					width: 0.28rem;
-					height: 2rem;
-					background-color: #000;
-					position: absolute;
-				}
-
-				&::before {
-					top: 10%;
-				}
-				&::after {
-					bottom: 10%;
-				}
-
-				&--prev {
-					&::before {
-						transform: rotate(45deg);
-					}
-
-					&::after {
-						transform: rotate(-45deg);
-					}
-				}
-
-				&--next {
-					&::before {
-						transform: rotate(-45deg);
-					}
-
-					&::after {
-						transform: rotate(45deg);
-					}
-				}
-			}
+		&::before {
+			top: 10%;
+		}
+		&::after {
+			bottom: 10%;
 		}
 	}
 
+	$(tag)__display-btn--prev {
+		left: 0;
+		margin-left: 10px;
+		&::before {
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+		}
+
+		@media(--viewport-tab-port){
+			display: none;
+		}
+	}
+
+	$(tag)__display-btn--next {
+		right: 0;
+		margin-right: 10px;
+		&::before {
+			transform: rotate(-45deg);
+		}
+
+		&::after {
+			transform: rotate(45deg);
+		}
+
+		@media(--viewport-tab-port){
+			display: none;
+		}
+	}
+
+	$(tag)__display-btn--outer{
+		padding: 2rem 0;
+		position: relative;
+		width: clamp(20%, 10vw, 30%);
+
+		@media(--viewport-phone){
+			width: clamp(7rem, 40%, 13rem);
+		}
+
+		&::before,
+		&::after {
+			content: '';
+			width: 0.28rem;
+			height: 2rem;
+			background-color: #000;
+			position: absolute;
+		}
+
+		&::before {
+			top: 10%;
+		}
+		&::after {
+			bottom: 10%;
+		}
+	}
+
+
+	$(tag)__display-btn--outer--prev{
+		&::before {
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+		}
+	}
+	$(tag)__display-btn--outer--next{
+		&::before {
+			transform: rotate(-45deg);
+		}
+
+		&::after {
+			transform: rotate(45deg);
+		}
+	}
 	.projects__display-item {
 		& :global(.slide) {
 			height: 30rem;

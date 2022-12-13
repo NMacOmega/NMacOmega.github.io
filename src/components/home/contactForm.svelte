@@ -36,8 +36,7 @@
 	</div>
 </section>
 
-<style lang="scss">
-	@import '$sass';
+<style lang="postcss">
 
 	.contact {
 		grid-column: 2 / -1;

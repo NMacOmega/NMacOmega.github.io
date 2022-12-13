@@ -8,7 +8,7 @@
 	const capstoneNetlifyLink = `https://glittering-caramel-ecb91e.netlify.app/`;
 </script>
 
-<div class={`${$$restProps.class || ''} project-capstone`}>
+<div id='capstone' class={`${$$restProps.class || ''} project-capstone`}>
 	<h2 class="project-description-heading">Capstone Crown Clothing App</h2>
 	<p class="project-capstone__p1 project-description-p">
 		In this learning project, I built an ecommerce solution with persistent data powered by Google
@@ -84,19 +84,19 @@
 			</p>
 		</div>
 	</div>
-	<Slider class={`link-github`} svg={'github'} href={capstoneGithubLink}>See Code on Github</Slider>
+	<Slider class={`link-github--capstone`} svg={'github'} href={capstoneGithubLink}>See Code on Github</Slider>
 
-	<Slider class={`link-netlify`} svg={'netlify'} href={capstoneNetlifyLink}>Live on Netlify</Slider>
+	<Slider class={`link-netlify--capstone`} svg={'netlify'} href={capstoneNetlifyLink}>Live on Netlify</Slider>
 </div>
 
-<style lang="scss">
-	@import '$mixins';
+<style lang="postcss">
 
-	.project-capstone {
+	$tag: .project-capstone;
+
+	 $(tag) {
 		background-color: lightgreen;
 		display: grid;
 		position: relative;
-
 		grid-template-columns: 2rem min(50vw, 80rem) 1fr 1fr 1fr 1fr 2rem;
 		$gutter: '. . . . . . .';
 		grid-template-rows:
@@ -110,14 +110,15 @@
 			$gutter
 			'. desc desc desc desc desc .'
 			$gutter
-			'. demo points-top points-top points-top points-top .'
+			'. demo ptop ptop ptop ptop .'
 			'. . . . github . .'
 			'. . . . netlify . .'
 			$gutter
-			'points-bottom points-bottom points-bottom points-bottom points-bottom points-bottom points-bottom '
+			'pbot pbot pbot pbot pbot pbot pbot'
 			$gutter;
 
-		@include respond(tab-land) {
+
+		@media(--viewport-tab-land){
 			grid-template-columns: 5rem 1fr 1fr 5rem;
 
 			grid-template-rows:
@@ -136,13 +137,13 @@
 				'. . . .'
 				'. github netlify .'
 				'. . . .'
-				'. points-top points-top .'
+				'. ptop ptop .'
 				'. . . .'
-				'. points-bottom points-bottom .'
+				'. pbot pbot .'
 				'. . . .';
 		}
 
-		@include respond(tab-port) {
+		@media(--viewport-tab-port){
 			grid-template-columns: 5rem 1fr 5rem;
 			grid-template-rows:
 				[title] min-content 5rem
@@ -164,9 +165,9 @@
 				'. . .'
 				'. points .'
 				'. . . ';
-		}
+		} 
 
-		@include respond(phone) {
+		@media(--viewport-phone){
 			grid-template-columns: 1rem 1fr 1rem;
 
 			grid-template-rows:
@@ -187,211 +188,217 @@
 				'. . .'
 				'. netlify .'
 				'. . .'
-				'. points-top .'
+				'. ptop .'
 				'. . .'
-				'. points-bottom .'
+				'. pbot .'
 				'. . .';
 		}
-
-		h2 {
+		
+		& > h2 {
 			grid-area: title;
 			text-align: left;
 			padding: 3rem;
 		}
 
-		&__p1 {
-			grid-area: desc;
-		}
+	}
 
-		&__demo {
+	$(tag)__p1{
+		grid-area: desc;
+	}
+	
+	$(tag)__demo {
 			grid-area: demo;
+	}
 
-			&--inner {
-				position: relative;
+	$(tag)__demo--inner {
+		position: relative;
+
+		& > video {
+			width: 95%;
+			margin-top: 3%;
+		}
+		
+	}
+
+	$(tag)__demo--mockup {
+		max-width: 96%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		pointer-events: none;
+	}
+
+	$(tag)__demo--link {
+		position: absolute;
+		display: block;
+		width: 85%;
+		height: 100%;
+		top: 2%;
+		border-radius: 20px;
+		overflow: hidden;
+		text-decoration: none;
+
+		max-width: 90%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+
+		@media(--viewport-tab-port){
+			display: none;
+		}
+	}
+
+	$(tag)__demo--overlay {
+		background-color: hsla(10, 1%, 1%, 40%);
+		width: 100%;
+		height: inherit;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: all 0.4s;
+
+		& > h3 {
+			color: #fff;
+			font-size: 1.6rem;
+			padding: 2rem;
+			border-radius: 10px;
+			background-color: hsla(10, 1%, 1%, 70%);
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}	
+
+
+	$top: $(tag)__points--top;
+	$bottom: $(tag)__points--bottom;
+
+	$(top) {
+			grid-area: ptop;
+			display: grid;
+			grid-template-rows: repeat(3, min-content);
+			grid-row-gap: 8rem;
+			padding: 0 4rem;
+		}
+
+	$(bottom) {
+			grid-area: pbot;
+			display: grid;
+			grid-template-columns: repeat(3, 5rem auto) 5rem;
+			grid-template-areas: '. col1 . col2 . col3 .';
+			align-items: start;
+
+			& > div:nth-child(1) {
+				grid-area: col1;
 			}
 
-			&--link {
-				position: absolute;
-				display: block;
-				width: 85%;
-				height: 100%;
-				top: 2%;
-				border-radius: 20px;
-				overflow: hidden;
-				text-decoration: none;
-
-				max-width: 90%;
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-
-				@include respond(tab-port) {
-					display: none;
-				}
+			& > div:nth-child(2) {
+				grid-area: col2;
 			}
 
-			&--overlay {
-				background-color: hsla(10, 1%, 1%, 40%);
-				width: 100%;
-				height: inherit;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				opacity: 0;
-				transition: all 0.4s;
-
-				h3 {
-					color: #fff;
-					font-size: 1.6rem;
-					padding: 2rem;
-					border-radius: 10px;
-					background-color: hsla(10, 1%, 1%, 70%);
-				}
-
-				&:hover {
-					opacity: 1;
-				}
-			}
-
-			&--mockup {
-				max-width: 96%;
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-				pointer-events: none;
-			}
-
-			video {
-				width: 95%;
-				margin-top: 3%;
+			& > div:nth-child(3) {
+				grid-area: col3;
 			}
 		}
 
-		&__points {
-			&--top {
-				grid-area: points-top;
-				display: grid;
-				grid-template-rows: repeat(3, min-content);
-				grid-row-gap: 8rem;
-				padding: 0 4rem;
+
+@media(--viewport-tab-land){
+		$(top),
+		$(bottom) {
+			display: flex;
+			flex-direction: row;
+			padding: 0;
+			align-items: space-between;
+			grid-column-gap: 6vw;
+		}
+	}
+
+@media(--viewport-tab-port){
+		$(top),
+		$(bottom) {
+			grid-area: points;
+			display: grid;
+			grid-template-columns: repeat(2, auto);
+			grid-template-rows: repeat(3, 1fr);
+			align-items: start;
+			padding: 0;
+
+			& > div:nth-child(1) {
+				grid-area: one;
 			}
-
-			&--bottom {
-				grid-area: points-bottom;
-				display: grid;
-				grid-template-columns: repeat(3, 5rem auto) 5rem;
-				grid-template-areas: '. col1 . col2 . col3 .';
-				align-items: start;
-
-				& > div:nth-child(1) {
-					grid-area: col1;
-				}
-
-				& > div:nth-child(2) {
-					grid-area: col2;
-				}
-
-				& > div:nth-child(3) {
-					grid-area: col3;
-				}
+			& > div:nth-child(2) {
+				grid-area: two;
 			}
-
-			@include respond(tab-land) {
-				&--top,
-				&--bottom {
-					display: flex;
-					flex-direction: row;
-					padding: 0;
-					align-items: space-between;
-					grid-column-gap: 6vw;
-				}
-			}
-
-			@include respond(tab-port) {
-				&--top,
-				&--bottom {
-					grid-area: points;
-					display: grid;
-					grid-template-columns: repeat(2, auto);
-					grid-template-rows: repeat(3, 1fr);
-					align-items: start;
-					padding: 0;
-
-					& > div:nth-child(1) {
-						grid-area: one;
-					}
-					& > div:nth-child(2) {
-						grid-area: two;
-					}
-					& > div:nth-child(3) {
-						grid-area: three;
-					}
-				}
-
-				&--top {
-					grid-template-areas:
-						'one two'
-						'three .'
-						'. .';
-				}
-
-				&--bottom {
-					grid-template-areas:
-						'. .'
-						'. one'
-						'two three';
-				}
-			}
-
-			@include respond(phone) {
-				&--top,
-				&--bottom {
-					display: flex;
-					flex-direction: column;
-					padding: 0 5rem;
-					grid-row-gap: 3rem;
-				}
-				&--top {
-					grid-area: points-top;
-				}
-				&--bottom {
-					grid-area: points-bottom;
-				}
+			& > div:nth-child(3) {
+				grid-area: three;
 			}
 		}
 
-		&__point {
+		$(top) {
+			grid-template-areas:
+				'one two'
+				'three .'
+				'. .';
+		}
+
+		$(bottom) {
+			grid-template-areas:
+				'. .'
+				'. one'
+				'two three';
+		}
+	}
+
+	@media(--viewport-phone){
+		$(top),
+		$(bottom) {
+			display: flex;
+			flex-direction: column;
+			padding: 0 5rem;
+			grid-row-gap: 3rem;
+		}
+		$(top) {
+			grid-area: ptop;
+		}
+		$(bottom){
+			grid-area: pbot;
+		}
+	}
+		
+		$(tag)__point {
 			display: flex;
 			text-align: left;
 			flex-direction: column;
 			align-items: start;
 			justify-content: center;
 
-			&--text {
+			& > $(tag)__point--text {
 				padding-top: 1.4rem;
 			}
 		}
 
-		& :global(.link-github) {
+
+		:global(.link-github--capstone) {
 			grid-area: github;
 			justify-self: start;
 			align-self: center;
 			--max-width: 25rem !important;
 
-			@include respond(tab-land) {
+			@media(--viewport-tab-land){
 				justify-self: center;
 			}
 		}
 
-		& :global(.link-netlify) {
+		:global(.link-netlify--capstone) {
 			grid-area: netlify;
 			justify-self: start;
 			align-self: center;
 			--max-width: 22rem !important;
 
-			@include respond(tab-land) {
+			@media(--viewport-tab-land){
 				justify-self: center;
 			}
 		}
-	}
 </style>

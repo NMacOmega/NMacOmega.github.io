@@ -8,7 +8,7 @@
 	let netlifyLink = `https://dainty-licorice-a16566.netlify.app/`;
 </script>
 
-<div class={`${$$restProps.class || ''} project-mapviewer`}>
+<div id='mapviewer' class={`${$$restProps.class || ''} project-mapviewer`}>
 	<h2 class="project-description-heading">Mapbox Viewer React App</h2>
 	<p class="project-mapviewer__p1 project-description-p">
 		This was my first passion project to see if building app could be for me. I had a lot of fun
@@ -81,14 +81,15 @@
 			</p>
 		</div>
 	</div>
-	<Slider reverse class={`link-github`} svg={'github'} href={gihubLink}>See Code on Github</Slider>
-	<Slider class={`link-netlify`} svg={'netlify'} href={netlifyLink}>Run on Netlify</Slider>
+	<Slider reverse class={`link-github--mapviewer`} svg={'github'} href={gihubLink}>See Code on Github</Slider>
+	<Slider class={`link-netlify--mapviewer`} svg={'netlify'} href={netlifyLink}>Run on Netlify</Slider>
 </div>
 
-<style lang="scss">
-	@import '$mixins';
+<style lang="postcss">
 
-	.project-mapviewer {
+	$tag: .project-mapviewer;
+
+	$(tag) {
 		display: grid;
 		grid-template-columns: 5rem 1fr 1fr 5rem;
 		$gutter: '. . . .';
@@ -112,7 +113,7 @@
 			'. points-bottom points-bottom .'
 			$gutter;
 
-		@include respond(tab-port) {
+			@media(--viewport-tab-port){
 			grid-template-columns: 5rem 1fr 1fr 5rem;
 			$gutter: '. . . .';
 			grid-template-rows:
@@ -138,7 +139,7 @@
 				$gutter;
 		}
 
-		@include respond(phone) {
+		@media(--viewport-phone){
 			grid-template-columns: 3rem 1fr 1fr 3rem;
 			grid-template-rows:
 				[title] min-content 5rem
@@ -164,47 +165,73 @@
 				'. . . .';
 		}
 
-		h2 {
+		& > h2 {
 			grid-area: title;
 			text-align: center;
 			padding: 3rem;
 		}
 
-		&__p1 {
+		& > $(tag)__p1 {
 			padding: 0 3rem;
 			grid-area: desc;
 
-			@include respond(tab-port) {
+			@media(--viewport-tab-port){
 				padding: 2rem 3rem;
 			}
 		}
+	}
 
-		&__demo {
+		$(tag)__demo {
 			grid-area: demo;
 			position: relative;
 			transform: rotateZ(6deg);
 			margin: auto;
-			@include respond(phone) {
+			@media(--viewport-phone){
 				transform: rotateZ(0);
 			}
 
-			&--inner {
+			& > $(tag)__demo--inner {
 				position: relative;
 				left: 10%;
 				top: 5%;
 				width: 100%;
 				max-width: 25rem;
 
-				@include respond(phone) {
+				@media(--viewport-phone){
 					left: unset;
 					top: unset;
 					max-width: 100%;
 					max-height: 90vh;
 					border-top: 3px solid #000;
 				}
+
+				& > $(tag)__demo--mockup {
+				width: 100%;
+				max-height: 102%;
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				pointer-events: none;
+
+				@media(--viewport-phone){
+					display: none;
+				}
 			}
 
-			&--link {
+				& > video {
+					width: 95%;
+					margin-top: 4%;
+
+					@media(--viewport-phone){
+						width: 100%;
+						margin-top: 0;
+						max-height: 90vh;
+					}
+				}
+			}
+		}
+
+		$(tag)__demo--link {
 				position: absolute;
 				display: block;
 				width: 100%;
@@ -213,7 +240,7 @@
 				border-radius: 20px;
 				overflow: hidden;
 				text-decoration: none;
-				@include respond(phone) {
+				@media(--viewport-phone){
 					width: 100%;
 					top: 100%;
 					transform: translateY(-100%);
@@ -222,7 +249,7 @@
 				}
 			}
 
-			&--overlay {
+			$(tag)__demo--overlay {
 				background-color: hsla(10, 1%, 1%, 40%);
 				width: inherit;
 				height: inherit;
@@ -232,19 +259,19 @@
 				opacity: 0;
 				transition: all 0.6s;
 
-				@include respond(phone) {
+				@media(--viewport-phone){
 					background-color: transparent;
 					align-items: end;
 					opacity: 1;
 				}
 
-				h3 {
+				& > h3 {
 					color: #fff;
 					font-size: 1.6rem;
 					padding: 2rem;
 					border-radius: 10px;
 					background-color: hsla(10, 1%, 1%, 70%);
-					@include respond(phone) {
+					@media(--viewport-phone){
 						width: 100%;
 						border-radius: 0;
 					}
@@ -255,94 +282,72 @@
 				}
 			}
 
-			&--mockup {
-				width: 100%;
-				max-height: 102%;
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-				pointer-events: none;
+		$top: $(tag)__points--top;
+		$bottom: $(tag)__points--bottom;
 
-				@include respond(phone) {
-					display: none;
-				}
+		$(top),
+		$(bottom) {
+			display: grid;
+			grid-auto-flow: column;
+			grid-column-gap: 3vw;
+			grid-auto-columns: fit-content(20vw);
+			align-items: start;
+
+			@media(--viewport-tab-port){
+				grid-auto-flow: row;
+				grid-auto-rows: min-content;
+				grid-template-columns: 1fr 1fr;
+				grid-row-gap: 5rem;
 			}
 
-			video {
-				width: 95%;
-				margin-top: 4%;
-
-				@include respond(phone) {
-					width: 100%;
-					margin-top: 0;
-					max-height: 90vh;
-				}
+			@media(--viewport-phone){
+				grid-template-columns: 1fr;
 			}
 		}
 
-		&__points {
-			&--top,
-			&--bottom {
-				display: grid;
-				grid-auto-flow: column;
-				grid-column-gap: 3vw;
-				grid-auto-columns: fit-content(20vw);
-				align-items: start;
-
-				@include respond(tab-port) {
-					grid-auto-flow: row;
-					grid-auto-rows: min-content;
-					grid-template-columns: 1fr 1fr;
-					grid-row-gap: 5rem;
-				}
-
-				@include respond(phone) {
-					grid-template-columns: 1fr;
-				}
-			}
-			&--top {
-				grid-area: points-top;
-			}
-			&--bottom {
-				grid-area: points-bottom;
-			}
+		$(top) {
+			grid-area: points-top;
 		}
+		$(bottom) {
+			grid-area: points-bottom;
+		}
+		
 
-		&__point {
+		$(tag)__point {
 			display: flex;
 			flex-direction: column;
 			align-items: start;
 			justify-content: center;
 			text-align: start;
 
-			&--text {
+			& > $(tag)__point--text {
 				padding-right: 4vw;
 
-				@include respond(tab-land) {
+				@media(--viewport-tab-land){
 					padding-right: unset;
 				}
 			}
 		}
 
-		& :global(.link-github) {
+		 :global(.link-github--mapviewer) {
 			grid-area: github;
 			justify-self: end;
 			--max-width: 25rem !important;
 			margin-right: 2rem;
 
-			@include respond(phone) {
+			@media(--viewport-phone){
 				margin: 0 auto;
 			}
 		}
 
-		& :global(.link-netlify) {
+		 :global(.link-netlify--mapviewer) {
 			grid-area: netlify;
 			justify-self: start;
 			margin-left: 2rem;
 			--max-width: 21rem !important;
-			@include respond(phone) {
+			@media(--viewport-phone){
 				margin: 0 auto;
 			}
 		}
-	}
+	
 </style>

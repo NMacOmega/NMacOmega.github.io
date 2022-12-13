@@ -1,5 +1,6 @@
 <script>
 	import Header from '@comps/header/header.svelte';
+	import Footer from '@comps/footer/footer.svelte';
 	import Sidebar from '@comps/sidebar/sidebar.svelte';
 
 	import HeroSection from '@comps/home/hero.svelte';
@@ -23,8 +24,9 @@
 	<ProjectsSection />
 	<ContactForm />
 </main>
+<Footer/>
 
-<style lang="scss">
+<style lang="postcss">
 	.grid-container {
 		display: grid;
 		grid-template-columns: max-content repeat(7, 1fr);

@@ -2,35 +2,51 @@
 	import { tweened } from 'svelte/motion';
 	import { quartInOut } from 'svelte/easing';
 	import modalData from '$stores';
+	import { createEventDispatcher } from "svelte";
 	import svgPath from '@svg/logos.svg';
 	import mssqlSvg from '@svg/individuals/mssql.svg';
 	import nodejsSvg from '@svg/individuals/nodejs.svg';
 
-	let svgIcons = [
-		/*classname, svg href, hover title*/
-		['stackoverflow', `${svgPath}#stackoverflow-notext`, 'Stack Overflow'],
-		['mapbox', `${svgPath}#mapbox-notext`, 'Mapbox'],
-		['vscode', `${svgPath}#vscode`, 'VS Code'],
-		['sass', `${svgPath}#sass`, 'SASS'],
-		['svelte', `${svgPath}#svelte`, 'Svelte'],
-		['css', `${svgPath}#css`, 'CSS'],
-		['github', `${svgPath}#github`, 'Github'],
-		['html', `${svgPath}#html`, 'HTML5'],
-		['mongodb', `${svgPath}#mongodb-notext`, 'Mongo DB'],
-		['handlebars', `${svgPath}#handlebars-notext`, 'Handlebars'],
-		['mssql', `${mssqlSvg}`, 'SQL Server'],
-		['nodejs', `${nodejsSvg}`, 'Node JS'],
-		['bigcommerce', `${svgPath}#bigcommerce-notext`, 'Bigcommerce'],
-		['postman', `${svgPath}#postman-notext`, 'Postman'],
-		['react', `${svgPath}#react`, 'React']
-	];
+	import BigCommerce from '@comps/modal/modalContents/modalBigcommerce.svelte';
+	import Github from '@comps/modal/modalContents/modalGithub.svelte';
+	import Handlebars from '@comps/modal/modalContents/modalHandlebars.svelte';
+	import HTML from '@comps/modal/modalContents/modalHTML.svelte';
+	import Mapbox from '@comps/modal/modalContents/modalMapbox.svelte';
+	import MongoDB from '@comps/modal/modalContents/modalMongoDB.svelte';
+	import Node from '@comps/modal/modalContents/modalNode.svelte';
+	import Postman from '@comps/modal/modalContents/modalPostman.svelte';
+	import React from '@comps/modal/modalContents/modalReact.svelte';
+	import SASS from '@comps/modal/modalContents/modalSCSS.svelte';
+	import Stackoverflow from '@comps/modal/modalContents/modalStackOverflow.svelte';
+	import Svelte from '@comps/modal/modalContents/modalSvelte.svelte';
+	import TSQL from '@comps/modal/modalContents/modalTSQL.svelte';
+	import VSCode from '@comps/modal/modalContents/modalVScode.svelte';
+
+	import TechItem from './techItem.svelte';
+
+	const techs = {
+		'bigcommerce': {title: "Big Commerce", svg:`${svgPath}#bigcommerce-notext`, component: BigCommerce},
+		'stackoverflow': {title: "Stack Overflow", svg:`${svgPath}#stackoverflow-notext`, component: Stackoverflow},
+		'mapbox': {title: "Mapbox", svg:`${svgPath}#mapbox-notext`, component: Mapbox},
+		'vscode': {title: "VS Code", svg:`${svgPath}#vscode`, component: VSCode},
+		'sass': {title: "SASS", svg:`${svgPath}#sass`, component: SASS},
+		'svelte': {title: "Svelte", svg:`${svgPath}#svelte`, component: Svelte},
+		'github': {title: "Github", svg:`${svgPath}#github`, component: Github},
+		'html': {title: "HTML", svg:`${svgPath}#html`, component: HTML},
+		'mongodb': {title: "Mongo DB", svg:`${svgPath}#mongodb-notext`, component: MongoDB},
+		'handlebars': {title: "Handlebars", svg:`${svgPath}#handlebars-notext`, component: Handlebars},
+		'mssql': {title: "SQL Server", svg:`${mssqlSvg}`, component: TSQL},
+		'nodejs': {title: "Node JS", svg:`${nodejsSvg}`, component: Node},
+		'postman': {title: "Postman", svg:`${svgPath}#postman-notext`, component: Postman},
+		'react': {title: "React", svg:`${svgPath}#react`, component: React},
+
+	};
+
+	const numInnerItems = 5;
 
 	const reNotOnSpriteSheet = /^(mssql|nodejs)$/;
 
-	let svgIconsInner = svgIcons.slice(0, 5);
-	let svgIconsOuter = svgIcons.slice(6, 15);
-
-	let highlightedTitle = svgIcons[Math.floor(Math.random() * svgIcons.length)][2] || 'CSS';
+	let highlightedTitle = Object.values(techs)[Math.floor(Math.random() * Object.keys(techs).length)].title;
 	let oldTitle = highlightedTitle;
 
 	let disabled = false;
@@ -40,10 +56,10 @@
 		easing: quartInOut
 	});
 
-	const handleIconHover = (name) => {
+	const onIconHover = (name) => {
 		if (name === highlightedTitle || disabled) return;
 		// isHovering = true;
-		disabled = true;
+		// disabled = true;
 		oldTitle = highlightedTitle;
 		highlightedTitle = name;
 		hoverOffset.set(0, { duration: 0 });
@@ -51,16 +67,19 @@
 		// setTimeout(() => (disabled = false), 200);
 	};
 
-	const releaseHover = () => (disabled = false);
-	const handleTechClick = (tech) => {
-		console.log(tech);
+	const onReleaseHover = () => (disabled = false);
+	
+	const onClick = (tech, component) => {
 		modalData.update((_) => {
-			return { type: 'tech', name: tech };
+			return { name: 'tech', bodyComponent: component };
 		});
 	};
+
+	const props = { onClick, onIconHover, onReleaseHover, reNotOnSpriteSheet};
 </script>
 
 <section class="techs">
+
 	<div class="techs__text">
 		<h1 class="techs__heading heading-1">I Love to learn and grow</h1>
 		<h4 class="techs__subheading heading-4">
@@ -73,112 +92,46 @@
 			</div>
 		</div>
 	</div>
+
+
 	<div class="techs__display">
 		<ul
 			class="techs__list techs__list--outer"
 			style={`animation-play-state: ${isHovering ? 'paused' : 'running'};`}
 		>
-			{#each svgIconsOuter as [title, href, name]}
-				<li
-					class="techs__item techs__item--outer"
-					on:mouseover={() => handleIconHover(name)}
-					on:mouseleave={releaseHover}
-					on:focus
-					on:click={() => handleTechClick(title)}
-					on:keydown
-				>
-					<div
-						class="techs__icon techs__icon--outer"
-						style={`animation-play-state: ${isHovering ? 'paused' : 'running'};`}
-					>
-						{#if title.match(reNotOnSpriteSheet)}
-							<img
-								src={href}
-								alt="Logo SVG"
-								class="techs__svg techs__svg--outer techs__svg-{title}"
-							/>
-						{:else}
-							<svg class="techs__svg techs__svg--outer techs__svg-{title}">
-								<use xlink:href={href} />
-							</svg>
-						{/if}
-					</div>
-				</li>
-			{/each}
+		{#each Object.entries(techs) as [name, {title, svg, component}], i}
+			{#if i >= numInnerItems}
+				<TechItem  type ="outer" props = {{...props, name, title, href: svg, component, isHovering}} />
+			{/if}	
+		{/each}
 		</ul>
+
+
 		<ul
 			class="techs__list techs__list--inner"
 			style={`animation-play-state: ${isHovering ? 'paused' : 'running'};`}
 		>
-			{#each svgIconsInner as [title, href, name]}
-				<li
-					class="techs__item  techs__item--inner"
-					on:mouseover={() => handleIconHover(name)}
-					on:mouseleave={releaseHover}
-					on:focus
-					on:click={() => handleTechClick(title)}
-					on:keydown
-				>
-					<div
-						class="techs__icon techs__icon--inner"
-						style={`animation-play-state: ${isHovering ? 'paused' : 'running'};`}
-					>
-						{#if title.match(reNotOnSpriteSheet)}
-							<img
-								src={href}
-								alt="Logo SVG"
-								class="techs__svg techs__svg--inner techs__svg-{title}"
-							/>
-						{:else}
-							<svg class="techs__svg techs__svg--inner techs__svg-{title}">
-								<use xlink:href={href} />
-							</svg>
-						{/if}
-					</div>
-				</li>
-			{/each}
+		{#each Object.entries(techs) as [name, {title, svg, component}], i}
+			{#if i < numInnerItems}
+				<TechItem  type ="inner"  props = {{...props, name, title, href: svg, component, isHovering}} />
+			{/if}	
+		{/each}
 		</ul>
+
 	</div>
 </section>
 
-<style lang="scss">
-	@import '$sass';
+<style lang="postcss">
 
-	/*SCSS Variables*/
+	$tag: .techs;
+
+	/*Variables*/
 	$rotation-timing: 90s;
 	$pulse-timing: 1.3s;
 	$pulse-scale: 1.3;
 
-	/*Mixins*/
-	/// @param {Length} $circle-size - Large circle size
-	/// @param {Length} $item-size - Single item size
-	@mixin on-circle($item-count, $circle-size, $item-size) {
-		width: $circle-size;
-		height: $circle-size;
-		> * {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			margin: -(calc($item-size / 2));
-			width: $item-size;
-			height: $item-size;
-
-			$angle: calc(360 / $item-count);
-			$rot: 0;
-
-			@for $i from 1 through $item-count {
-				&:nth-of-type(#{$i}) {
-					transform: rotate($rot * 1deg) translate(calc($circle-size / 2)) rotate($rot * -1deg);
-				}
-
-				$rot: $rot + $angle;
-			}
-		}
-	}
-
 	/*Elements*/
-
-	.techs {
+	 $(tag) {
 		grid-column: 2 / -1;
 
 		background-image: linear-gradient(
@@ -195,103 +148,134 @@
 		grid-template-columns: 0.25fr 3.3fr 5fr;
 		grid-template-rows: 65rem;
 
-		@include respond(tab-land) {
+		 @media(--viewport-tab-land){
 			grid-template-rows: 35rem 30rem;
 		}
 
-		&__text {
-			grid-column: 2 / 3;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			color: var(--color-white);
-			overflow: visible;
+	} 
 
-			@include respond(tab-land) {
-				grid-column: 2 / -1;
-				text-align: center;
-				justify-content: end;
-				padding-bottom: 3rem;
+	$(tag)__text {
+		grid-column: 2 / 3;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		color: var(--color-white);
+		overflow: visible;
+
+		@media(--viewport-tab-land){
+			grid-column: 2 / -1;
+			text-align: center;
+			justify-content: end;
+			padding-bottom: 3rem;
+		}
+	}
+
+	$(tag)__heading {
+		margin-bottom: 3rem;
+		font-size: clamp(2.6rem, 4vw, 4.2rem);
+	}
+
+	$(tag)__subheading {
+		font-size: clamp(2rem, 3.6vw, 3rem);
+		margin-bottom: 3rem;
+	}
+
+	$(tag)__hover-highlight {
+		overflow-y: hidden;
+	}
+
+	$(tag)__hover-highlight--items {
+			position: relative;
+			min-height: 5rem;
+		}
+
+	$(tag)__hover-highlight--hidden,
+	$(tag)__hover-highlight--main {
+		width: 100%;
+		font-size: clamp(3.7rem, 3.8vw, 5rem);
+		position: absolute;
+		@media(--viewport-tab-land){
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+	}
+
+	$(tag)__hover-highlight--main {
+		top: -100%;
+	}
+
+	$(tag)__display {
+		grid-column: 3 / 4;
+		position: relative;
+		overflow: hidden;
+
+		@media(--viewport-tab-land){
+			grid-column: 1 / -1;
+			width: 100%;
+		}
+	}
+
+	$(tag)__list {
+		list-style: none;
+		position: absolute;
+		border-radius: 50%;
+		transform-origin: center;
+		height: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(0);
+		@media(--viewport-tab-land){
+			margin: 0 auto;
+			top: 95%;
+		}
+	} 
+
+		$(tag)__list--outer {
+			$circle-size: 45rem;
+			$angle: calc(360 / 9);
+
+			animation: orbit reverse $rotation-timing linear infinite;
+
+			& > :global(li:nth-of-type(1)) {
+				transform: rotate(calc($angle * 1 * -1deg)) translate(calc($circle-size / 2)) rotate(calc($angle * 1 * 1deg));	
 			}
-		}
 
-		&__heading {
-			margin-bottom: 3rem;
-			font-size: clamp(2.6rem, 4vw, 4.2rem);
-		}
 
-		&__subheading {
-			font-size: clamp(2rem, 3.6vw, 3rem);
-			margin-bottom: 3rem;
-		}
-
-		&__hover-highlight {
-			overflow-y: hidden;
-			&--items {
-				position: relative;
-				min-height: 5rem;
-			}
-
-			&--hidden,
-			&--main {
-				width: 100%;
-				font-size: clamp(3.7rem, 3.8vw, 5rem);
-				position: absolute;
-				@include respond(tab-land) {
-					left: 50%;
-					transform: translate(-50%, 0);
+			@for $i from 2 to 9 {
+				& > :global(li:nth-of-type($i)) {
+					transform: rotate(calc($angle * $i * -1deg)) translate(calc($circle-size / 2)) rotate(calc($angle * $i * 1deg));
 				}
 			}
+		} 
 
-			&--main {
-				top: -100%;
+
+		$(tag)__list--inner {
+			$circle-size: 20rem;
+			$angle: calc(360 / 5);
+
+			animation: orbit $rotation-timing linear infinite;
+			
+			& > :global(li:nth-of-type(1)) {
+				transform: rotate(calc($angle * 1 * 1deg)) translate(calc($circle-size / 2)) rotate(calc($angle * 1 * -1deg));	
 			}
-		}
 
-		&__display {
-			grid-column: 3 / 4;
-			position: relative;
-			overflow: hidden;
-
-			@include respond(tab-land) {
-				grid-column: 1 / -1;
-				width: 100%;
+			@for $i from 2 to 5 {
+				& > :global(li:nth-of-type($i)) {
+					transform: rotate(calc($angle * $i * 1deg)) translate(calc($circle-size / 2)) rotate(calc($angle * $i * -1deg));
+				}
 			}
-		}
+		} 
 
-		&__list {
-			list-style: none;
+		:global(.techs__item) {
+			$item-size: 8rem;
+
 			position: absolute;
-			border-radius: 50%;
-			transform-origin: center;
-			// margin-left: 200px;
-			height: 100%;
-
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%, -50%) rotate(0);
+			margin: calc($item-size / 2 * -1);
+			width: $item-size;
+			height: $item-size;
 
-			@include respond(tab-land) {
-				margin: 0 auto;
-				top: 95%;
-			}
-
-			@include respond(phone) {
-				// display: none;
-			}
-			&--outer {
-				@include on-circle($item-count: 9, $circle-size: 45rem, $item-size: 8rem);
-				animation: orbit-right $rotation-timing linear infinite;
-			}
-
-			&--inner {
-				transform-origin: center;
-				@include on-circle($item-count: 5, $circle-size: 20rem, $item-size: 8rem);
-				animation: orbit-left $rotation-timing linear infinite;
-			}
-		}
-
-		&__item {
 			&::before {
 				content: '';
 				min-width: 100%;
@@ -303,12 +287,12 @@
 			}
 
 			&:hover::before,
-			&:hover .techs__svg {
+			&:hover :global(.techs__svg) {
 				animation: pulse $pulse-timing linear infinite;
 			}
 		}
 
-		&__icon {
+		:global(.techs__icon){
 			width: 100%;
 			height: 100%;
 			display: flex;
@@ -316,56 +300,43 @@
 			justify-content: center;
 			border-radius: 50%;
 			padding: 1rem;
+			animation-play-state: running;
+		}		
 
-			&--inner {
-				animation: orbit-counter-spin-left $rotation-timing linear infinite;
-			}
-
-			&--outer {
-				animation: orbit-counter-spin-right $rotation-timing linear infinite;
-			}
+		:global(.techs__icon--inner){
+			animation: spin reverse $rotation-timing linear infinite;
+			
+			
+		}
+		:global(.techs__icon--outer){
+			animation: spin $rotation-timing linear infinite;
 		}
 
-		&__svg {
+		:global(.techs__svg){
 			max-width: 100%;
 			max-height: 100%;
-			// padding: 1px;
-			transform: scale(1);
-
-			/*Custom sizing rules for specific items*/
-
-			&-bigcommerce,
-			&-css,
-			&-html {
-				padding: 3px;
-			}
-
-			&-mongodb {
-				max-height: 130%;
-			}
+			transform: scale(1); 
 		}
-	}
+		
+		:global(.techs__svg--bigcommerce, 
+                .techs__svg--css, 
+			    .techs__svg--html){
+			padding: 3px;
+		}
+		
+		:global(.techs__svg--mongodb){
+			max-height: 130%;
+		}
+
 
 	/* ---------- Animation ---------- */
-	@keyframes orbit-right {
+	@keyframes orbit {
 		100% {
 			transform: translate(-50%, -50%) rotate(360deg);
 		}
 	}
 
-	@keyframes orbit-left {
-		100% {
-			transform: translate(-50%, -50%) rotate(-360deg);
-		}
-	}
-
-	@keyframes orbit-counter-spin-right {
-		100% {
-			transform: rotate(-360deg);
-		}
-	}
-
-	@keyframes orbit-counter-spin-left {
+	@keyframes spin {
 		100% {
 			transform: rotate(360deg);
 		}

@@ -1,44 +1,53 @@
 <script>
-  import modalData from "../../stores.js";
-  import ModalBody from "./modalBody.svelte";
+    import modalData from "../../stores.js";
+    import { fade } from "svelte/transition";
 
-  let name,
-    type,
-    visible = false;
-  modalData.subscribe((payload) => {
-    if (!payload.name) return;
-    console.log(payload);
-    ({ name, type } = payload);
-    visible = true;
-  });
+    let bodyComponent, visible = false;
 
-  const closeModal = () => (visible = false);
-</script>
+    modalData.subscribe((payload) => {
+        if (!payload.bodyComponent)
+         return;
+        ({bodyComponent} = payload);
+        visible = true;
+    });
+  
 
-<div
-  class="modal__background"
-  style={`opacity:${visible ? 0.25 : 0};pointer-events:${
-    visible ? "all" : "none"
-  }`}
-  on:click={closeModal}
-/>
+    const closeModal = () => {visible = false;};
 
-{#if visible}
-  <ModalBody {name} {type} on:closeModal={closeModal} />
-{/if}
+  </script>
+  
+  <div
+    class="modal__background"
+    style:--opacity={visible ? 0.25 : 0}
+    style:--events={visible ? "all" : "none"}
+    on:click={closeModal} on:keydown
+  />
+  
+  {#if visible}
+    <svelte:component this={bodyComponent}>
+          <span
+            class="modal__close"
+            slot="closeButton"
+            in:fade={{ delay: 800, duration: 150 }}
+            on:click={closeModal}
+            on:keydown
+            />
+          </svelte:component>
+  {/if}
+  
+  <style lang="postcss">  
+    .modal__background {
+        z-index: 2000;
+        position: fixed;
+        min-width: 100vw;
+        min-height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: #000;
+        transition: all 0.2s;
 
-<style lang="scss">
-  .modal {
-    z-index: 2001;
-    &__background {
-      z-index: 2000;
-      position: fixed;
-      min-width: 100vw;
-      min-height: 100vh;
-      top: 0;
-      left: 0;
-      background-color: #000;
-      transition: all 0.2s;
-    }
-  }
-</style>
+        opacity: var(--opacity);
+        pointer-events: var(--events);
+      }
+  </style>
+  
