@@ -1,4 +1,5 @@
 <script>
+
 	import Header from '@comps/header/header.svelte';
 	import Footer from '@comps/footer/footer.svelte';
 	import Sidebar from '@comps/sidebar/sidebar.svelte';
@@ -8,6 +9,10 @@
 	import TechSection from '@comps/home/techs/techs.svelte';
 	import ProjectsSection from '@comps/home/projects/projects.svelte';
 	import ContactForm from '@comps/home/contactForm.svelte';
+
+	export let data;
+	const {processForm = ()=>{}} = data; 
+
 </script>
 
 <svelte:head>
@@ -22,7 +27,7 @@
 	<BioSection />
 	<TechSection />
 	<ProjectsSection />
-	<ContactForm />
+	<ContactForm onSubmit = {processForm}/>
 </main>
 <Footer/>
 

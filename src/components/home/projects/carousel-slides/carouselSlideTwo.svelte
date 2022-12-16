@@ -14,6 +14,11 @@
 </a>
 
 <style lang="postcss">
+
+.link__2 {
+		margin: 1rem 6rem 0 6rem;
+		display: block;
+	}
 	:global(.slide__2) {
 		/* Makes it a global so the reproduced carousel slide will be styled too */
 		position: relative;

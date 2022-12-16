@@ -21,7 +21,12 @@
 
 <style lang="postcss">
 
-	:global(.slide__3) {
+.link__3 {
+		margin: 1rem 6rem 0 6rem;
+		display: block;
+	}
+
+:global(.slide__3) {
 		/* Makes it a global so the reproduced carousel slide will be styled too */
 		justify-content: space-evenly;
 		position: relative;

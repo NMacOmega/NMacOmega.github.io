@@ -2,43 +2,27 @@
 	import { tweened } from 'svelte/motion';
 	import { quartInOut } from 'svelte/easing';
 	import modalData from '$stores';
-	import { createEventDispatcher } from "svelte";
 	import svgPath from '@svg/logos.svg';
 	import mssqlSvg from '@svg/individuals/mssql.svg';
 	import nodejsSvg from '@svg/individuals/nodejs.svg';
 
-	import BigCommerce from '@comps/modal/modalContents/modalBigcommerce.svelte';
-	import Github from '@comps/modal/modalContents/modalGithub.svelte';
-	import Handlebars from '@comps/modal/modalContents/modalHandlebars.svelte';
-	import HTML from '@comps/modal/modalContents/modalHTML.svelte';
-	import Mapbox from '@comps/modal/modalContents/modalMapbox.svelte';
-	import MongoDB from '@comps/modal/modalContents/modalMongoDB.svelte';
-	import Node from '@comps/modal/modalContents/modalNode.svelte';
-	import Postman from '@comps/modal/modalContents/modalPostman.svelte';
-	import React from '@comps/modal/modalContents/modalReact.svelte';
-	import SASS from '@comps/modal/modalContents/modalSCSS.svelte';
-	import Stackoverflow from '@comps/modal/modalContents/modalStackOverflow.svelte';
-	import Svelte from '@comps/modal/modalContents/modalSvelte.svelte';
-	import TSQL from '@comps/modal/modalContents/modalTSQL.svelte';
-	import VSCode from '@comps/modal/modalContents/modalVScode.svelte';
-
 	import TechItem from './techItem.svelte';
 
 	const techs = {
-		'bigcommerce': {title: "Big Commerce", svg:`${svgPath}#bigcommerce-notext`, component: BigCommerce},
-		'stackoverflow': {title: "Stack Overflow", svg:`${svgPath}#stackoverflow-notext`, component: Stackoverflow},
-		'mapbox': {title: "Mapbox", svg:`${svgPath}#mapbox-notext`, component: Mapbox},
-		'vscode': {title: "VS Code", svg:`${svgPath}#vscode`, component: VSCode},
-		'sass': {title: "SASS", svg:`${svgPath}#sass`, component: SASS},
-		'svelte': {title: "Svelte", svg:`${svgPath}#svelte`, component: Svelte},
-		'github': {title: "Github", svg:`${svgPath}#github`, component: Github},
-		'html': {title: "HTML", svg:`${svgPath}#html`, component: HTML},
-		'mongodb': {title: "Mongo DB", svg:`${svgPath}#mongodb-notext`, component: MongoDB},
-		'handlebars': {title: "Handlebars", svg:`${svgPath}#handlebars-notext`, component: Handlebars},
-		'mssql': {title: "SQL Server", svg:`${mssqlSvg}`, component: TSQL},
-		'nodejs': {title: "Node JS", svg:`${nodejsSvg}`, component: Node},
-		'postman': {title: "Postman", svg:`${svgPath}#postman-notext`, component: Postman},
-		'react': {title: "React", svg:`${svgPath}#react`, component: React},
+		'bigcommerce': {title: "Big Commerce", svg:`${svgPath}#bigcommerce-notext`},
+		'stackoverflow': {title: "Stack Overflow", svg:`${svgPath}#stackoverflow-notext`},
+		'mapbox': {title: "Mapbox", svg:`${svgPath}#mapbox-notext`},
+		'vscode': {title: "VS Code", svg:`${svgPath}#vscode`},
+		'sass': {title: "SASS", svg:`${svgPath}#sass`},
+		'svelte': {title: "Svelte", svg:`${svgPath}#svelte`},
+		'github': {title: "Github", svg:`${svgPath}#github`},
+		'html': {title: "HTML", svg:`${svgPath}#html`},
+		'mongodb': {title: "Mongo DB", svg:`${svgPath}#mongodb-notext`},
+		'handlebars': {title: "Handlebars", svg:`${svgPath}#handlebars-notext`},
+		'mssql': {title: "SQL Server", svg:`${mssqlSvg}`},
+		'nodejs': {title: "Node JS", svg:`${nodejsSvg}`},
+		'postman': {title: "Postman", svg:`${svgPath}#postman-notext`},
+		'react': {title: "React", svg:`${svgPath}#react`},
 
 	};
 
@@ -69,13 +53,13 @@
 
 	const onReleaseHover = () => (disabled = false);
 	
-	const onClick = (tech, component) => {
-		modalData.update((_) => {
-			return { name: 'tech', bodyComponent: component };
-		});
-	};
+	// const onClick = (tech, component) => {
+	// 	modalData.update((_) => {
+	// 		return { name: 'tech', bodyComponent: component };
+	// 	});
+	// };
 
-	const props = { onClick, onIconHover, onReleaseHover, reNotOnSpriteSheet};
+	const props = { onIconHover, onReleaseHover, reNotOnSpriteSheet};
 </script>
 
 <section class="techs">

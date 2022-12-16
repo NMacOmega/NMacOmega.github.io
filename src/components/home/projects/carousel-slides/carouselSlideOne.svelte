@@ -16,11 +16,16 @@
 
 <style lang="postcss">
 
+/* Grabs the container in the parent */
+	.link__1 {
+		margin: 1rem 6rem 0 6rem;
+		display: block;
+	}
+
 	/* Grabs the container in the parent */
 	:global(.slide__1) {
 		/* Makes it a global so the reproduced carousel slide will be styled too */
 		justify-content: space-evenly;
-		padding: 1rem 6rem 0 6rem;
 		position: relative;
 
 		& .slide__1-text {

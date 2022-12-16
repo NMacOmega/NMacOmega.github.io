@@ -1,7 +1,9 @@
 ☐ Header Is not reactive
+☐ Are we doing a Sidebar?
 ☐ Form Needs reactive Styling and does not work from header/footer links
-☐ Modals Need to be written up
 ☐ Hero Main page Needs responsive improvement
 ☐ Hero Main page needs rewrite
 ☐ Need to improve color scheme and clear out unused root vairables
-☐ How will we use the contact form to discretely send email to ourselves
+✔ How will we use the contact form to discretely send email to ourselves @done (12/13/2022, 9:53:36 PM)
+✔ Slideshow links are larger than the slides they wrap around. Set width and height of anchors @done (12/13/2022, 8:58:50 PM)
+✘ Modals Need to be written up @cancelled (12/14/2022, 4:39:43 PM)

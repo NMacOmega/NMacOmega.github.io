@@ -2,7 +2,6 @@
     export let props = {}, type = "inner"; 
     let {name, title = "", 
     onIconHover, 
-    onClick, 
     onReleaseHover, 
     href, 
     component, 
@@ -17,8 +16,6 @@ class="techs__item techs__item--{type}"
 on:mouseover={() => onIconHover(title)}
 on:mouseleave={onReleaseHover}
 on:focus
-on:click={() => onClick(title, component)}
-on:keydown
 >
 <div
     class="techs__icon techs__icon--{type}"
