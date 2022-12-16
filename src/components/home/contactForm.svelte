@@ -10,7 +10,7 @@
 	const textarea = {rows: 4, cols: 40}
 
 
-// At breakpoints make fields take up whole space and expand padding on message boxes
+// What about Captchas?
 
 </script>
 

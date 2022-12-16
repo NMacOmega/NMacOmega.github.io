@@ -45,6 +45,7 @@
 			& h2 {
 				font-size: clamp(3rem, 20%, 2.8rem);
 				padding-bottom: 3rem;
+				
 				@media(--viewport-tab-port){
 					padding-bottom: 1rem;
 				}

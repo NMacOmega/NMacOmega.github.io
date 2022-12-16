@@ -1,7 +1,7 @@
 {
-  "src/lib/images/android-mockup.png": {
-    "file": "_app/immutable/assets/android-mockup-6be20ba7.png",
-    "src": "src/lib/images/android-mockup.png"
+  "src/lib/svg/individuals/mssql.svg": {
+    "file": "_app/immutable/assets/mssql-540988a0.svg",
+    "src": "src/lib/svg/individuals/mssql.svg"
   },
   "src/lib/svg/logos.svg": {
     "file": "_app/immutable/assets/logos-c3caacd8.svg",
@@ -11,42 +11,6 @@
     "file": "_app/immutable/assets/nodejs-a3c8ec54.svg",
     "src": "src/lib/svg/individuals/nodejs.svg"
   },
-  "src/lib/svg/individuals/mssql.svg": {
-    "file": "_app/immutable/assets/mssql-540988a0.svg",
-    "src": "src/lib/svg/individuals/mssql.svg"
-  },
-  "src/lib/images/imac-mockup.png": {
-    "file": "_app/immutable/assets/imac-mockup-edf3f5ab.png",
-    "src": "src/lib/images/imac-mockup.png"
-  },
-  "src/lib/images/fewd-showcase-2.png": {
-    "file": "_app/immutable/assets/fewd-showcase-2-2fbc34ba.png",
-    "src": "src/lib/images/fewd-showcase-2.png"
-  },
-  "src/lib/images/denys-striyeshyn-wJ7yGwz2-00-unsplash.jpg": {
-    "file": "_app/immutable/assets/denys-striyeshyn-wJ7yGwz2-00-unsplash-4fb66022.jpg",
-    "src": "src/lib/images/denys-striyeshyn-wJ7yGwz2-00-unsplash.jpg"
-  },
-  "src/lib/images/fewd-showcase-3.png": {
-    "file": "_app/immutable/assets/fewd-showcase-3-67cdedb3.png",
-    "src": "src/lib/images/fewd-showcase-3.png"
-  },
-  "src/lib/images/bg-landscape.jpg": {
-    "file": "_app/immutable/assets/bg-landscape-43ece932.jpg",
-    "src": "src/lib/images/bg-landscape.jpg"
-  },
-  "src/lib/images/fewd-showcase-1.png": {
-    "file": "_app/immutable/assets/fewd-showcase-1-bca68b2f.png",
-    "src": "src/lib/images/fewd-showcase-1.png"
-  },
-  "src/lib/images/me.png": {
-    "file": "_app/immutable/assets/me-f4b179b8.png",
-    "src": "src/lib/images/me.png"
-  },
-  "src/lib/images/fewd-showcase-4.png": {
-    "file": "_app/immutable/assets/fewd-showcase-4-475557e9.png",
-    "src": "src/lib/images/fewd-showcase-4.png"
-  },
   "src/lib/svg/individuals/icons8-checkmark-256.svg": {
     "file": "_app/immutable/assets/icons8-checkmark-256-9fd465f1.svg",
     "src": "src/lib/svg/individuals/icons8-checkmark-256.svg"
@@ -55,13 +19,49 @@
     "file": "_app/immutable/assets/icons8-cancel-240-c452242b.svg",
     "src": "src/lib/svg/individuals/icons8-cancel-240.svg"
   },
-  "src/lib/videos/mapviewer.mp4": {
-    "file": "_app/immutable/assets/mapviewer-868622e1.mp4",
-    "src": "src/lib/videos/mapviewer.mp4"
+  "src/lib/images/android-mockup.png": {
+    "file": "_app/immutable/assets/android-mockup-6be20ba7.png",
+    "src": "src/lib/images/android-mockup.png"
+  },
+  "src/lib/images/bg-landscape.jpg": {
+    "file": "_app/immutable/assets/bg-landscape-43ece932.jpg",
+    "src": "src/lib/images/bg-landscape.jpg"
+  },
+  "src/lib/images/denys-striyeshyn-wJ7yGwz2-00-unsplash.jpg": {
+    "file": "_app/immutable/assets/denys-striyeshyn-wJ7yGwz2-00-unsplash-4fb66022.jpg",
+    "src": "src/lib/images/denys-striyeshyn-wJ7yGwz2-00-unsplash.jpg"
+  },
+  "src/lib/images/me.png": {
+    "file": "_app/immutable/assets/me-f4b179b8.png",
+    "src": "src/lib/images/me.png"
+  },
+  "src/lib/images/imac-mockup.png": {
+    "file": "_app/immutable/assets/imac-mockup-edf3f5ab.png",
+    "src": "src/lib/images/imac-mockup.png"
+  },
+  "src/lib/images/fewd-showcase-1.png": {
+    "file": "_app/immutable/assets/fewd-showcase-1-bca68b2f.png",
+    "src": "src/lib/images/fewd-showcase-1.png"
+  },
+  "src/lib/images/fewd-showcase-2.png": {
+    "file": "_app/immutable/assets/fewd-showcase-2-2fbc34ba.png",
+    "src": "src/lib/images/fewd-showcase-2.png"
+  },
+  "src/lib/images/fewd-showcase-3.png": {
+    "file": "_app/immutable/assets/fewd-showcase-3-67cdedb3.png",
+    "src": "src/lib/images/fewd-showcase-3.png"
+  },
+  "src/lib/images/fewd-showcase-4.png": {
+    "file": "_app/immutable/assets/fewd-showcase-4-475557e9.png",
+    "src": "src/lib/images/fewd-showcase-4.png"
   },
   "src/lib/images/fewd-showcase-5.png": {
     "file": "_app/immutable/assets/fewd-showcase-5-7324430d.png",
     "src": "src/lib/images/fewd-showcase-5.png"
+  },
+  "src/lib/videos/mapviewer.mp4": {
+    "file": "_app/immutable/assets/mapviewer-868622e1.mp4",
+    "src": "src/lib/videos/mapviewer.mp4"
   },
   "src/lib/videos/Crown-capstone.mp4": {
     "file": "_app/immutable/assets/Crown-capstone-edb1877c.mp4",
@@ -75,6 +75,10 @@
     "file": "_app/immutable/assets/mapviewer-24e3c79a.webm",
     "src": "src/lib/videos/mapviewer.webm"
   },
+  "src/lib/images/showcase_fewd_final.png": {
+    "file": "_app/immutable/assets/showcase_fewd_final-c41e79fd.png",
+    "src": "src/lib/images/showcase_fewd_final.png"
+  },
   "src/lib/svg/individuals/netlify.svg": {
     "file": "_app/immutable/assets/netlify-9dd83248.svg",
     "src": "src/lib/svg/individuals/netlify.svg"
@@ -82,10 +86,6 @@
   "src/lib/images/githubpagelogo.jpg": {
     "file": "_app/immutable/assets/githubpagelogo-7025a4b4.jpg",
     "src": "src/lib/images/githubpagelogo.jpg"
-  },
-  "src/lib/images/showcase_fewd_final.png": {
-    "file": "_app/immutable/assets/showcase_fewd_final-c41e79fd.png",
-    "src": "src/lib/images/showcase_fewd_final.png"
   },
   "src/lib/images/mockup_mapreader.png": {
     "file": "_app/immutable/assets/mockup_mapreader-a3b8151c.png",
@@ -96,12 +96,12 @@
     "src": "src/lib/images/mockup_crown_clothing.png"
   },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-60d8b72b.js",
+    "file": "_app/immutable/start-c1f9035b.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
       "_index-688b3480.js",
-      "_singletons-bd816fde.js",
+      "_singletons-5664f755.js",
       "_paths-6cd3a76e.js"
     ],
     "dynamicImports": [
@@ -126,16 +126,16 @@
     ]
   },
   "src/routes/+error.svelte": {
-    "file": "_app/immutable/components/pages/_error.svelte-787d5516.js",
+    "file": "_app/immutable/components/pages/_error.svelte-4dbc8f01.js",
     "src": "src/routes/+error.svelte",
     "isEntry": true,
     "imports": [
       "_index-688b3480.js",
-      "_singletons-bd816fde.js"
+      "_singletons-5664f755.js"
     ]
   },
   "src/routes/+page.svelte": {
-    "file": "_app/immutable/components/pages/_page.svelte-4ad5d257.js",
+    "file": "_app/immutable/components/pages/_page.svelte-475d7a35.js",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
@@ -146,7 +146,7 @@
       "_index-6708fa66.js"
     ],
     "css": [
-      "_app/immutable/assets/_page-640f8d3d.css"
+      "_app/immutable/assets/_page-84ba4632.css"
     ],
     "assets": [
       "_app/immutable/assets/me-f4b179b8.png",
@@ -169,7 +169,7 @@
     ]
   },
   "src/routes/projects/+page.svelte": {
-    "file": "_app/immutable/components/pages/projects/_page.svelte-fda6fbfc.js",
+    "file": "_app/immutable/components/pages/projects/_page.svelte-6ad7230e.js",
     "src": "src/routes/projects/+page.svelte",
     "isEntry": true,
     "imports": [
@@ -177,7 +177,7 @@
       "_logos-6527eb60.js"
     ],
     "css": [
-      "_app/immutable/assets/_page-98434f30.css"
+      "_app/immutable/assets/_page-34c97cfb.css"
     ],
     "assets": [
       "_app/immutable/assets/denys-striyeshyn-wJ7yGwz2-00-unsplash-4fb66022.jpg",
@@ -220,8 +220,8 @@
       "__page-a35881c3.js"
     ]
   },
-  "_singletons-bd816fde.js": {
-    "file": "_app/immutable/chunks/singletons-bd816fde.js",
+  "_singletons-5664f755.js": {
+    "file": "_app/immutable/chunks/singletons-5664f755.js",
     "imports": [
       "_index-f5cd4354.js",
       "_paths-6cd3a76e.js"
@@ -283,7 +283,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/1.js": {
-    "file": "_app/immutable/chunks/1-62ec92f4.js",
+    "file": "_app/immutable/chunks/1-f83e69e9.js",
     "src": ".svelte-kit/generated/nodes/1.js",
     "isDynamicEntry": true,
     "imports": [
@@ -291,7 +291,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/2.js": {
-    "file": "_app/immutable/chunks/2-aee5c5a3.js",
+    "file": "_app/immutable/chunks/2-1d339c61.js",
     "src": ".svelte-kit/generated/nodes/2.js",
     "isDynamicEntry": true,
     "imports": [
@@ -309,7 +309,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/4.js": {
-    "file": "_app/immutable/chunks/4-21a63ee8.js",
+    "file": "_app/immutable/chunks/4-967257a3.js",
     "src": ".svelte-kit/generated/nodes/4.js",
     "isDynamicEntry": true,
     "imports": [
@@ -321,16 +321,16 @@
     "file": "_app/immutable/assets/_layout-79189a83.css",
     "src": "src/routes/+layout.css"
   },
-  "src/routes/+page.css": {
-    "file": "_app/immutable/assets/_page-640f8d3d.css",
-    "src": "src/routes/+page.css"
-  },
-  "src/routes/projects/+page.css": {
-    "file": "_app/immutable/assets/_page-98434f30.css",
-    "src": "src/routes/projects/+page.css"
-  },
   "logos.css": {
     "file": "_app/immutable/assets/logos-22944a04.css",
     "src": "logos.css"
+  },
+  "src/routes/projects/+page.css": {
+    "file": "_app/immutable/assets/_page-34c97cfb.css",
+    "src": "src/routes/projects/+page.css"
+  },
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page-84ba4632.css",
+    "src": "src/routes/+page.css"
   }
 }
