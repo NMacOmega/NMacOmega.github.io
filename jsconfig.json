@@ -21,9 +21,12 @@
 			"@vid/*": ["src/lib/videos/*"],
 			"@svg/": ["src/lib/svg"],
 			"@svg/*": ["src/lib/svg/*"],
+			"@pdf/": ["src/lib/pdf"],
+			"@pdf/*": ["src/lib/pdf/*"],
 			"@postcss":["src/lib/postcss"],
 			"@postcss/":["src/lib/postcss/*"],
 			"$stores": ["src/stores.js"],
+			"$hooks_client": ["src/hooks.client.js"],
 
 		}
 	}

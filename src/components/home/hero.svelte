@@ -6,7 +6,6 @@
 	<img src={selfPortrait} alt="Me" class="hero__img" />
 	<div class="hero__text">
 		<h1 class="heading-1 hero__title">Hey, I'm Nathaniel</h1>
-		<h2 class="heading-2 hero__subtitle">Hei, Jeg Heter Nathaniel</h2>
 	</div>
 </header>
 
@@ -45,7 +44,7 @@
 	
 		@media(--viewport-phone){
 			align-self: end;
-			margin: 0 auto;
+			margin: 1rem auto;
 		}
 	}
 	.hero__text {
@@ -62,7 +61,8 @@
 	}
 
 	.hero__title {
-		font-size: clamp(3rem, 5vw, 4rem);
+		font-size: clamp(2.8rem, 5vw, 3.8rem);
+		padding: 2rem;
 	}
 
 	.hero__subtitle {

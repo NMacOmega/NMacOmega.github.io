@@ -1,41 +1,42 @@
 <script>
 
 	import { base } from '$app/paths';
-	import modalData from '$stores';
+	import { page } from '$app/stores';
+	import { showModal } from '$hooks_client';
+	import ContactForm from '@comps/contactForm/contactForm.svelte';
+	let linkedIn = 'https://www.linkedin.com/in/nmac-12866';
 
-	export let page = undefined;
+	const  { route } = $page;
 
-	const onContactClick = () => {
-		// modalData.update((_) => {
-		// 	return { type: 'form', name: 'contact' };
-		// });
-	};
 
 let footerItems = [
 	{name: 'Projects', href:`${base}/projects`},
-	{name: 'CV', href:'#'},
-	{name: 'LinkedIn', href:'#'},
-	{name: 'Contact', href:'#', onClick: onContactClick},
+	{name: 'LinkedIn', href: linkedIn, newTab: true},
+	{name: 'Contact', href:'#', onClick: ()=> showModal('contact', ContactForm)},
 ];
 
-if (page === 'projects') {
+if (route.id === '/projects') {
 	footerItems = [
 	{name: 'Home', href:`${base}/`},
-	{name: 'CV', href:'#'},
-	{name: 'LinkedIn', href:'#'},
-	{name: 'Contact', href:'#', onClick: onContactClick},
+	{name: 'LinkedIn', href: linkedIn, newTab: true},
+	{name: 'Contact', href:'#', onClick: ()=> showModal('contact', ContactForm)},
 ];
 }
+
 
 </script>
 
 <footer class="footer">
 <ul class="footer__list">
-	{#each footerItems as {name, href, onClick}}
+	{#each footerItems as {name, href, onClick, newTab}}
 		{#if onClick}
 			<li class="footer__item" on:click|preventDefault={onClick}>
 				<a {href}>{name}</a>
 			</li>
+		{:else if newTab}
+		<li class="footer__item" >
+			<a {href} target="_blank" noreferrer noopener>{name}</a>
+		</li>
 		{:else}
 			<li class="footer__item" >
 				<a {href}>{name}</a>
@@ -43,9 +44,9 @@ if (page === 'projects') {
 		{/if}
 	{/each}
 </ul>
-<p class="copyright">
-	&copy; Nathaniel MacIver. This is my stuff. Please attribute me if you copy my stuff. Thanks
-</p>
+<!-- <p class="copyright">
+	&copy; Nathaniel. This is my stuff. Please attribute me if you copy my stuff. Thanks
+</p> -->
 </footer>
 
 <style lang="postcss">

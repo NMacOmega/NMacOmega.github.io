@@ -1,23 +1,19 @@
 <script>
+	import { formResponse, isFormsDisabled } from '$stores';
+	import { processForm } from '$hooks_client';
 	import { fade } from "svelte/transition";
 	import checkSVG from '@svg/individuals/icons8-checkmark-256.svg';
 	import errorSVG from '@svg/individuals/icons8-cancel-240.svg';
+	import formspreeSVG from '@svg/individuals/formspree.svg';
 
-	export let onSubmit = ()=>{};
-	let response = {};
-	$: disabled = response.status;
-	const handleForm = async (e)=>{ response = await onSubmit(e);}
+	const handleForm = async (e)=>{await processForm(e);}
+
 	const textarea = {rows: 4, cols: 40}
-
-
 // What about Captchas?
 
 </script>
 
-<section class="contact">
-	<h1 class="contact__heading heading-1">How can I help?</h1>
-
-	<div class={`contact__form${response.status ? ' contact__form--completed':''}`}>
+	<div class={`contact__form${$isFormsDisabled ? ' contact__form--disabled':''}`}>
 		<form class="form" on:submit|preventDefault={(e)=>handleForm(e)}>
 			<div class="u-margin-bottom-medium">
 				<h2 class="heading-2 contact__form--title">Contact Me</h2>
@@ -31,7 +27,7 @@
 					class="form__input contact__input--name"
 					placeholder="Full Name"
 					required
-					{disabled}
+					disabled={$isFormsDisabled}
 					
 				/>
 				<label for="name" class="form__label">Full Name</label>
@@ -45,7 +41,7 @@
 					class="form__input contact__input--email"
 					placeholder="Email address"
 					required
-					{disabled}
+					disabled={$isFormsDisabled}
 				/>
 				<label for="email" class="form__label">Email address</label>
 			</div>
@@ -59,31 +55,37 @@
 					placeholder="Message"
 					rows={textarea.rows}
 					required
-					{disabled}
+					disabled={$isFormsDisabled}
 				/>
 				<label for="message" class="form__label--textarea">Message</label>
 			</div>
 
 			<div class="form__group form__group--btn" >
-				{#if !disabled}
+				{#if !$isFormsDisabled}
 					<button class="btn btn--primary contact__btn" out:fade={{duration: 200 }}>Send Message</button>
 				{/if}
 			</div>
 		</form>
 
-		{#if response.status===200}
+		{#if $formResponse.status===200}
 		<div class="contact__response" in:fade={{duration: 900 }}>
 			<p class="contact__response--text"><span class="thanks">Thanks!</span> I got your message and will reach out to you when I can.</p>
 			<img class="contact__response--img" src={checkSVG} alt="Checkmark Icon">
 		</div>
-		{:else if response.status}
+		{:else if $isFormsDisabled}
 		<div class="contact__response" in:fade={{duration: 900 }}>
 			<p class="contact__response--text"><span class="sorry">Sorry,</span> I'm not able to take a message at this time. Please come back later.</p>
 			<img class="contact__response--img" src={errorSVG} alt="Error Icon">
 		</div>
 		{/if}
+
+		<div class="attribution">
+			<span>Forms by</span>
+			<a href="https://formspree.io/" target="_blank" noreferrer noopener>
+				<img src={formspreeSVG} alt="Formspree Logo">
+			</a>
+		</div>
 	</div>
-</section>
 
 <style lang="postcss">
 
@@ -91,38 +93,14 @@
 	$bgImageURL: url(@img/bg-landscape.jpg);
 	$transitionAppear: .2s; 
 
-	.contact {
-		grid-column: 2 / -1;
-		display: grid;
-		grid-template-columns: 1fr 70% 1fr;
-		padding: 3rem 0;
 
-		@media(--viewport-tab-port){
-			grid-template-columns: 2vw 1fr 2vw;
-		}
-	}
-	
-	.contact__heading {
-		grid-column: 1 / -1;
-		padding: 0 3rem;
-		background-image: linear-gradient(to right, #7ed56f, #28b485);
-		display: inline-block;
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-		letter-spacing: 2px;
-		text-align: center;
-	}
 	.contact__form {
-		position: relative;
-		grid-column: 2 / 3;
-		margin-top: 4rem;
 		box-shadow: 0 1.5rem 4rem rgba(var(--color-black), 0.4);
-
 		& * {
 			transition: all $transitionAppear;
 		}
 	}	
+
 	.contact__form::before{
 		content: '';
 		width: 100%;
@@ -151,7 +129,7 @@
 
 
 
-	.contact__form--completed{
+	.contact__form--disabled{
 		& label,
 		& input,
 		& textarea,
@@ -162,7 +140,7 @@
 	}
 
 
-	.contact__form--completed::before{
+	.contact__form--disabled::before{
 		background-image: $bgImageURL;	
 	}
 
@@ -269,6 +247,7 @@
 		& > img{
 			max-width: 12rem;
 			background-image: radial-gradient(white, white 60%, transparent 50%);
+			z-index: 99;
 		}
 	}
 
@@ -286,5 +265,11 @@
 		background-image: linear-gradient(to right, hsla(30, 70%, 60%, .9), hsla(10, 100%, 70%, .9));
 	}
 
+
+	.attribution{
+		position: absolute;
+		right: 3%;
+		bottom: 3%;
+	}
 	
 </style>

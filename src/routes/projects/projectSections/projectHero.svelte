@@ -1,12 +1,11 @@
 <script>
-	// import HeroBackgroundJPG from '@img/projects-hero-background-unsplash.jpg';
 	import HeroBackgroundJPG from '@img/denys-striyeshyn-wJ7yGwz2-00-unsplash.jpg';
 </script>
 
 <div class={`${$$restProps.class || ''} project-hero`} style={`--url: url(${HeroBackgroundJPG})`}>
 	<div class="project-hero__inner">
-		<h1>Here are my projects</h1>
-		<h6>They are awesome!!</h6>
+		<h1>Project showcase</h1>
+		<h6>Here's some of my best work</h6>
 	</div>
 </div>
 
@@ -41,13 +40,17 @@
 			z-index: 2;
 			border-radius: 4px;
 
+			@media(--viewport-tab-port){
+				padding: 3rem 1vw;
+			}
+
 			& > h1 {
-				font-size: 4rem;
+				font-size: clamp(2rem, 10vw, 4rem);
 				padding: 4rem 0;
 			}
 
 			& > h6 {
-				font-size: 2.2rem;
+				font-size: clamp(.8rem, 7vw, 2.2rem);
 			}
 		}
 </style>

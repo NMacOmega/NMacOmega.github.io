@@ -28,7 +28,9 @@ const config = {
 			'@vid': 'src/lib/videos',
 			'@svg': 'src/lib/svg',
 			'@postcss': 'src/lib/postcss',
-			$stores: 'src/stores.js'
+			'@pdf': 'src/lib/pdf',
+			$stores: 'src/stores.js',
+			$hooks_client: 'src/hooks.client.js'
 		}
 	}
 };

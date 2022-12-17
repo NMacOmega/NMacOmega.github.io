@@ -10,14 +10,14 @@
 </script>
 
 <main class="grid-container">
-	<Header page="projects" />
+	<Header />
 	<!-- <Sidebar /> -->
 	<ProjectHero class="project-section" />
 	<ProjectMapviewer class="project-section" />
 	<ProjectCapstone class="project-section" />
 	<ProjectFEWD class="project-section" />
 </main>
-<Footer page="projects" />
+<Footer/>
 
 <style lang="postcss">
 	.grid-container {
